@@ -1,0 +1,40 @@
+syntax = "proto3";
+package user;
+
+service UserService {
+    rpc Create(CreateUserResquest) returns(UserResponse){};
+    rpc Update(UpdateUserResponse) returns(UserResponse){};
+    rpc ShowAll(Empty) returns(UsersResponse){};
+    rpc ShowOne(IdRequest) returns(UserResponse){};
+    rpc Delete(IdRequest) returns(Empty){};
+}
+
+message Empty{}
+
+message CreateUserResquest{
+    string name = 1;
+    string email = 2;
+    string password = 3;
+}
+
+message UserResponse{
+    string id =1;
+    string name = 2;
+    string email = 3;
+    string password = 4;
+}
+
+message UpdateUserResponse{
+    string id =1;
+    optional string name = 2;
+    optional string email = 3;
+    optional string password = 4;
+}
+
+message UsersResponse{
+    repeated UserResponse users = 1;
+}
+
+message IdRequest{
+    string id = 1;
+}

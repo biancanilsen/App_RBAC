@@ -2,10 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
 
-// import '../../../../../responsive.dart';
-// import '../components/background.dart';
-// import '../signIn.dart';
-
 class PortalPage extends StatefulWidget {
   const PortalPage({Key? key}) : super(key: key);
 
