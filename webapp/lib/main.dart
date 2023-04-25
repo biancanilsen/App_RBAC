@@ -21,7 +21,7 @@ class MyApp extends StatelessWidget {
         routes: {
           '/': (context) => const PortalPage(),
           '/signin': (context) => SignInPage(),
-          '/signup': (context) => const SignUpPage(),
+          '/signup': (context) => SignUpPage(),
         });
   }
 }
