@@ -14,6 +14,19 @@ class SignInPage extends StatefulWidget {
 
 class _SignInPageState extends State<SignInPage> {
   final _formKey = GlobalKey<FormState>();
+  final textFieldFocusNode = FocusNode();
+  bool _obscured = false;
+
+  void _toggleObscured() {
+    setState(() {
+      _obscured = !_obscured;
+      if (textFieldFocusNode.hasPrimaryFocus)
+        return; // If focus is on text field, dont unfocus
+      textFieldFocusNode.canRequestFocus =
+          false; // Prevents focus if tap on eye
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -44,15 +57,20 @@ class _SignInPageState extends State<SignInPage> {
                       child: SizedBox(
                         width: 340,
                         child: TextFormField(
+                          keyboardType: TextInputType.visiblePassword,
+                          obscureText: _obscured,
                           decoration: InputDecoration(
-                            filled: true,
+                            floatingLabelBehavior: FloatingLabelBehavior
+                                .never, //Hides label on focus or if filled
+                            labelText: "Email",
+                            filled: true, // Needed for adding a fill color
                             fillColor: Colors.grey[300],
-                            enabledBorder: OutlineInputBorder(
-                              borderSide:
-                                  BorderSide(width: 1, color: Colors.white),
-                              borderRadius: BorderRadius.circular(25.0),
+                            isDense: true, // Reduces height a bit
+                            border: OutlineInputBorder(
+                              borderSide: BorderSide.none, // No border
+                              borderRadius: BorderRadius.circular(
+                                  25), // Apply corner radius
                             ),
-                            labelText: 'Email',
                           ),
                         ),
                       ),
@@ -60,15 +78,34 @@ class _SignInPageState extends State<SignInPage> {
                     SizedBox(
                       width: 340,
                       child: TextFormField(
+                        keyboardType: TextInputType.visiblePassword,
+                        obscureText: _obscured,
+                        focusNode: textFieldFocusNode,
                         decoration: InputDecoration(
-                          filled: true,
+                          floatingLabelBehavior: FloatingLabelBehavior
+                              .never, //Hides label on focus or if filled
+                          labelText: "Password",
+                          filled: true, // Needed for adding a fill color
                           fillColor: Colors.grey[300],
-                          enabledBorder: OutlineInputBorder(
-                            borderSide:
-                                BorderSide(width: 1, color: Colors.white),
-                            borderRadius: BorderRadius.circular(25.0),
+                          isDense: true, // Reduces height a bit
+                          border: OutlineInputBorder(
+                            borderSide: BorderSide.none, // No border
+                            borderRadius: BorderRadius.circular(
+                                25), // Apply corner radius
                           ),
-                          labelText: 'Senha',
+                          prefixIcon: Icon(Icons.lock_rounded, size: 24),
+                          suffixIcon: Padding(
+                            padding: const EdgeInsets.fromLTRB(0, 0, 4, 0),
+                            child: GestureDetector(
+                              onTap: _toggleObscured,
+                              child: Icon(
+                                _obscured
+                                    ? Icons.visibility_rounded
+                                    : Icons.visibility_off_rounded,
+                                size: 24,
+                              ),
+                            ),
+                          ),
                         ),
                       ),
                     ),

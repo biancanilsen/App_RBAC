@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:webapp/feature/users/presentation/pages/signIn.dart';
-import 'package:webapp/feature/users/presentation/pages/signUp.dart';
-import 'feature/users/presentation/pages/portal/portal.dart';
+import 'package:webapp/feature/users/presentation/pages/sign_in.dart';
+import 'package:webapp/feature/users/presentation/pages/sign_up.dart';
+import 'feature/users/presentation/pages/portal.dart';
 
 void main() {
   runApp(const MyApp());
