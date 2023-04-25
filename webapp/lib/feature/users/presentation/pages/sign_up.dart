@@ -20,10 +20,8 @@ class _SignUpPageState extends State<SignUpPage> {
   void _toggleObscured() {
     setState(() {
       _obscured = !_obscured;
-      if (textFieldFocusNode.hasPrimaryFocus)
-        return; // If focus is on text field, dont unfocus
-      textFieldFocusNode.canRequestFocus =
-          false; // Prevents focus if tap on eye
+      if (textFieldFocusNode.hasPrimaryFocus) return;
+      textFieldFocusNode.canRequestFocus = false;
     });
   }
 
@@ -31,7 +29,7 @@ class _SignUpPageState extends State<SignUpPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Cadastro', style: TextStyle(fontSize: 18)),
+        title: const Text('CADASTRO', style: TextStyle(fontSize: 18)),
         backgroundColor: Colors.white,
         foregroundColor: const Color(0xFF706CD8),
         centerTitle: true,
@@ -60,16 +58,14 @@ class _SignUpPageState extends State<SignUpPage> {
                           keyboardType: TextInputType.visiblePassword,
                           obscureText: _obscured,
                           decoration: InputDecoration(
-                            floatingLabelBehavior: FloatingLabelBehavior
-                                .never, //Hides label on focus or if filled
+                            floatingLabelBehavior: FloatingLabelBehavior.never,
                             labelText: "Nome",
-                            filled: true, // Needed for adding a fill color
+                            filled: true,
                             fillColor: Colors.grey[300],
-                            isDense: true, // Reduces height a bit
+                            isDense: true,
                             border: OutlineInputBorder(
-                              borderSide: BorderSide.none, // No border
-                              borderRadius: BorderRadius.circular(
-                                  25), // Apply corner radius
+                              borderSide: BorderSide.none,
+                              borderRadius: BorderRadius.circular(25),
                             ),
                           ),
                         ),
@@ -83,16 +79,14 @@ class _SignUpPageState extends State<SignUpPage> {
                           keyboardType: TextInputType.visiblePassword,
                           obscureText: _obscured,
                           decoration: InputDecoration(
-                            floatingLabelBehavior: FloatingLabelBehavior
-                                .never, //Hides label on focus or if filled
+                            floatingLabelBehavior: FloatingLabelBehavior.never,
                             labelText: "Email",
-                            filled: true, // Needed for adding a fill color
+                            filled: true,
                             fillColor: Colors.grey[300],
-                            isDense: true, // Reduces height a bit
+                            isDense: true,
                             border: OutlineInputBorder(
-                              borderSide: BorderSide.none, // No border
-                              borderRadius: BorderRadius.circular(
-                                  25), // Apply corner radius
+                              borderSide: BorderSide.none,
+                              borderRadius: BorderRadius.circular(25),
                             ),
                           ),
                         ),
@@ -107,16 +101,14 @@ class _SignUpPageState extends State<SignUpPage> {
                           obscureText: _obscured,
                           focusNode: textFieldFocusNode,
                           decoration: InputDecoration(
-                            floatingLabelBehavior: FloatingLabelBehavior
-                                .never, //Hides label on focus or if filled
+                            floatingLabelBehavior: FloatingLabelBehavior.never,
                             labelText: "Password",
-                            filled: true, // Needed for adding a fill color
+                            filled: true,
                             fillColor: Colors.grey[300],
-                            isDense: true, // Reduces height a bit
+                            isDense: true,
                             border: OutlineInputBorder(
-                              borderSide: BorderSide.none, // No border
-                              borderRadius: BorderRadius.circular(
-                                  25), // Apply corner radius
+                              borderSide: BorderSide.none,
+                              borderRadius: BorderRadius.circular(25),
                             ),
                             prefixIcon: Icon(Icons.lock_rounded, size: 24),
                             suffixIcon: Padding(

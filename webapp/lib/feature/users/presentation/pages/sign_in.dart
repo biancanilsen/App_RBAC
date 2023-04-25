@@ -4,7 +4,6 @@ import 'package:flutter/src/widgets/placeholder.dart';
 
 class SignInPage extends StatefulWidget {
   SignInPage({super.key});
-  final TextEditingController _nameController = TextEditingController();
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
 
@@ -20,10 +19,8 @@ class _SignInPageState extends State<SignInPage> {
   void _toggleObscured() {
     setState(() {
       _obscured = !_obscured;
-      if (textFieldFocusNode.hasPrimaryFocus)
-        return; // If focus is on text field, dont unfocus
-      textFieldFocusNode.canRequestFocus =
-          false; // Prevents focus if tap on eye
+      if (textFieldFocusNode.hasPrimaryFocus) return;
+      textFieldFocusNode.canRequestFocus = false;
     });
   }
 
@@ -60,16 +57,14 @@ class _SignInPageState extends State<SignInPage> {
                           keyboardType: TextInputType.visiblePassword,
                           obscureText: _obscured,
                           decoration: InputDecoration(
-                            floatingLabelBehavior: FloatingLabelBehavior
-                                .never, //Hides label on focus or if filled
+                            floatingLabelBehavior: FloatingLabelBehavior.never,
                             labelText: "Email",
-                            filled: true, // Needed for adding a fill color
+                            filled: true,
                             fillColor: Colors.grey[300],
-                            isDense: true, // Reduces height a bit
+                            isDense: true,
                             border: OutlineInputBorder(
-                              borderSide: BorderSide.none, // No border
-                              borderRadius: BorderRadius.circular(
-                                  25), // Apply corner radius
+                              borderSide: BorderSide.none,
+                              borderRadius: BorderRadius.circular(25),
                             ),
                           ),
                         ),
@@ -82,16 +77,14 @@ class _SignInPageState extends State<SignInPage> {
                         obscureText: _obscured,
                         focusNode: textFieldFocusNode,
                         decoration: InputDecoration(
-                          floatingLabelBehavior: FloatingLabelBehavior
-                              .never, //Hides label on focus or if filled
+                          floatingLabelBehavior: FloatingLabelBehavior.never,
                           labelText: "Password",
-                          filled: true, // Needed for adding a fill color
+                          filled: true,
                           fillColor: Colors.grey[300],
-                          isDense: true, // Reduces height a bit
+                          isDense: true,
                           border: OutlineInputBorder(
-                            borderSide: BorderSide.none, // No border
-                            borderRadius: BorderRadius.circular(
-                                25), // Apply corner radius
+                            borderSide: BorderSide.none,
+                            borderRadius: BorderRadius.circular(25),
                           ),
                           prefixIcon: Icon(Icons.lock_rounded, size: 24),
                           suffixIcon: Padding(
@@ -136,9 +129,7 @@ class _SignInPageState extends State<SignInPage> {
                           '/signup',
                         );
                       },
-                      style: TextButton.styleFrom(
-                          primary: Color(0xFF706CD8) // Text Color
-                          ),
+                      style: TextButton.styleFrom(primary: Color(0xFF706CD8)),
                       child: Text(
                         'Você não tem conta? Cadastrar',
                         textAlign: TextAlign.center,
