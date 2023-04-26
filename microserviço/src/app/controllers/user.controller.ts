@@ -10,7 +10,6 @@ import { Role } from "../enum/role.enum";
 import { PoliciesGuard } from "../guards/polices.guard";
 import { CheckPolicies } from "../decorators/check-policies.decorator";
 import { AllUserPolicyHandler, CreateUserPolicyHandler, ReadUserPolicyHandler, UpdateUserPolicyHandler } from "../policy-handle/policy-handler ";
-import { ExceptionFilter } from "../rpc-exception";
 
 
 @Controller('user')

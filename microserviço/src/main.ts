@@ -3,7 +3,6 @@ import { AppModule } from './app.module';
 import { GrpcOptions, MicroserviceOptions, Transport } from '@nestjs/microservices';
 import { join } from 'path';
 import * as path from 'path';
-import { ExceptionFilter } from './app/rpc-exception';
 
 async function bootstrap() {
   const app = await NestFactory.createMicroservice<MicroserviceOptions>(AppModule, {

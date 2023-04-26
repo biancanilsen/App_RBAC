@@ -25,11 +25,8 @@ export class PoliciesGuard implements CanActivate {
             ) || [];
         const bearerToken = request.get('authorization').toString();
         const authToken: string[] = bearerToken.split(' ');
-        if (authToken[0] != 'Bearer') {
-            throw new UnauthorizedException('Invalid Auth Strategy');
-        }
 
-        const verify = await this.authService.verifyToken(authToken[1]);
+        const verify = await this.authService.verifyToken(authToken[0]);
 
         const user = await this.userService.findOneOrFail(verify.sud);
         const ability = this.userAbilityFactory.createForUser(user);

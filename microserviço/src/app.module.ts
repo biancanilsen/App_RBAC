@@ -4,7 +4,6 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { UserModule } from './app/module/user.module';
 import { AuthModule } from './app/module/auth.module';
 import { APP_FILTER } from '@nestjs/core';
-import { ExceptionFilter } from './app/rpc-exception';
 
 
 @Module({
