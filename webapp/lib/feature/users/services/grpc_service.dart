@@ -1,5 +1,7 @@
 import 'package:grpc/grpc.dart';
-
+import '../../../generated/auth.pbgrpc.dart';
+import '../../../generated/auth.pbenum.dart';
+import '../../../generated/auth.pb.dart';
 import '../../../generated/user.pb.dart';
 import '../../../generated/user.pbgrpc.dart';
 import '../../../generated/user.pbenum.dart';
@@ -25,23 +27,11 @@ class ServiceClient {
       ),
     );
     stub = UserServiceClient(client);
+    authStub = AuthServiceClient(client);
   }
 
   UserServiceClient? stub;
-
-  Future<UsersResponse> getUsers() async {
-    try {
-      if (stub == null) {
-        throw Exception('Stub has not been initialized');
-      }
-      final request = Empty();
-      final response = await stub?.index(request);
-      return response!;
-    } catch (e) {
-      print('Caught error: $e');
-      throw Exception('Error getting users: $e');
-    }
-  }
+  AuthServiceClient? authStub;
 
   Future<void> dispose() async {
     await client.shutdown();
@@ -65,6 +55,31 @@ class ServiceClient {
 
       final response = await stub?.create(request);
 
+      return response!;
+    } catch (e) {
+      print('Caught error: $e');
+      throw Exception('Error getting users: $e');
+    }
+  }
+
+  Future<AuthResponse> postLogin(AuthRequest model) async {
+    try {
+      if (authStub == null) {
+        Init();
+        if (authStub == null) {
+          throw Exception('Failed to initialize authStub');
+        }
+      }
+      final request;
+
+      request = AuthRequest(
+        email: model.email,
+        password: model.password,
+      );
+
+      final response = await authStub?.login(request);
+
+      print(response);
       return response!;
     } catch (e) {
       print('Caught error: $e');

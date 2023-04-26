@@ -20,63 +20,24 @@ class UsersCubit extends Cubit<UsersState> {
   final ServiceClient _serviceClient;
 
   Future<void> postRegister(String name, String email, String password) async {
-    UserResponse loginUser =
+    UserResponse registerUser =
         UserResponse(name: name, email: email, password: password);
     emit(const UsersLoading());
     await Future.delayed(const Duration(seconds: 1));
     try {
-      await _serviceClient.postRegister(loginUser);
+      await _serviceClient.postRegister(registerUser);
       emit(const UsersSuccess());
     } on Exception {
       emit(const UsersFailure());
     }
   }
 
-  Future<void> getUsers() async {
-    emit(const UsersLoading());
-    try {
-      final usersResponse = await _serviceClient.getUsers();
-      final users = usersResponse.users
-          .map((user) => User(
-                id: user.id,
-                name: user.name,
-                email: user.email,
-                password: user.password,
-              ))
-          .toList();
-      print(users);
-      emit(UsersLoaded(
-        users: users,
-      ));
-    } on Exception {
-      emit(const UsersFailure());
-    }
-  }
-
-  Future<void> deleteUser(id) async {
+  Future<void> postLogin(String email, String password) async {
+    AuthRequest loginUser = AuthRequest(email: email, password: password);
     emit(const UsersLoading());
     await Future.delayed(const Duration(seconds: 1));
     try {
-      // await _serviceClient.deleteUsers(id);
-      getUsers();
-    } on Exception {
-      emit(const UsersFailure());
-    }
-  }
-
-  Future<void> saveUser(
-      String? id, String name, String email, String password) async {
-    UserResponse editUser =
-        UserResponse(id: id, name: name, email: email, password: password);
-    emit(const UsersLoading());
-    await Future.delayed(const Duration(seconds: 2));
-    try {
-      debugPrint('id: $id');
-      if (id == null) {
-        // editUser = await _serviceClient.updateUsers(editUser);
-      } else {
-        // editUser = await _serviceClient.updateUsers(editUser);
-      }
+      await _serviceClient.postLogin(loginUser);
       emit(const UsersSuccess());
     } on Exception {
       emit(const UsersFailure());

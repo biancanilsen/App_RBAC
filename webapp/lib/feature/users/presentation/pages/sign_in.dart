@@ -251,6 +251,7 @@ class LoginPage extends StatelessWidget {
                           child: TextFormField(
                             keyboardType: TextInputType.visiblePassword,
                             obscureText: _obscured,
+                            controller: _emailController,
                             decoration: InputDecoration(
                               floatingLabelBehavior:
                                   FloatingLabelBehavior.never,
@@ -272,6 +273,7 @@ class LoginPage extends StatelessWidget {
                           keyboardType: TextInputType.visiblePassword,
                           obscureText: _obscured,
                           focusNode: textFieldFocusNode,
+                          controller: _passwordController,
                           decoration: InputDecoration(
                             floatingLabelBehavior: FloatingLabelBehavior.never,
                             labelText: "Password",
@@ -304,19 +306,29 @@ class LoginPage extends StatelessWidget {
                         child: SizedBox(
                           width: 340,
                           height: 50,
-                          child: ElevatedButton(
-                            onPressed: () {
-                              Navigator.of(context).pushNamed(
-                                '/signin',
+                          child: BlocBuilder<UserValidationCubit,
+                              UserValidationState>(
+                            builder: (context, state) {
+                              return Padding(
+                                padding: const EdgeInsets.all(0.1),
+                                child: ElevatedButton(
+                                  onPressed: () {
+                                    //fechar teclado
+                                    FocusScope.of(context).unfocus();
+                                    context.read<UsersCubit>().postLogin(
+                                        _emailController.text,
+                                        _passwordController.text);
+                                  },
+                                  style: ElevatedButton.styleFrom(
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(25),
+                                    ),
+                                    backgroundColor: const Color(0xFF706CD8),
+                                  ),
+                                  child: Text('LOGIN'),
+                                ),
                               );
                             },
-                            style: ElevatedButton.styleFrom(
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(25),
-                              ),
-                              backgroundColor: const Color(0xFF706CD8),
-                            ),
-                            child: const Text('LOGIN'),
                           ),
                         ),
                       ),
