@@ -44,15 +44,33 @@ class RegisterPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          title: const Text('CADASTRO', style: TextStyle(fontSize: 18)),
-          backgroundColor: Colors.white,
-          foregroundColor: const Color(0xFF706CD8),
-          centerTitle: true,
-          elevation: 0,
-        ),
+      appBar: AppBar(
+        title: const Text('CADASTRO', style: TextStyle(fontSize: 18)),
         backgroundColor: Colors.white,
-        body: SingleChildScrollView(
+        foregroundColor: const Color(0xFF706CD8),
+        centerTitle: true,
+        elevation: 0,
+      ),
+      backgroundColor: Colors.white,
+      body: BlocListener<UsersCubit, UsersState>(
+        listener: (context, state) {
+          if (state is UsersSuccess) {
+            Navigator.pop(context);
+            ScaffoldMessenger.of(context)
+              ..hideCurrentSnackBar()
+              ..showSnackBar(const SnackBar(
+                content: Text('Operação realizada com sucesso'),
+              ));
+          } else if (state is UsersFailure) {
+            Navigator.pop(context);
+            ScaffoldMessenger.of(context)
+              ..hideCurrentSnackBar()
+              ..showSnackBar(const SnackBar(
+                content: Text('Erro'),
+              ));
+          }
+        },
+        child: SingleChildScrollView(
           physics: BouncingScrollPhysics(),
           child: Padding(
             padding: const EdgeInsets.only(top: 20.0),
@@ -191,6 +209,8 @@ class RegisterPage extends StatelessWidget {
               ),
             ),
           ),
-        ));
+        ),
+      ),
+    );
   }
 }

@@ -228,34 +228,75 @@ class LoginPage extends StatelessWidget {
         elevation: 0,
       ),
       backgroundColor: Colors.white,
-      body: SingleChildScrollView(
-        physics: BouncingScrollPhysics(),
-        child: Padding(
-          padding: const EdgeInsets.only(top: 20.0),
-          child: Container(
-            child: Column(
-              children: [
-                Image.asset(
-                  'assets/images/login.png',
-                  height: 350,
-                  width: 600,
-                ),
-                Form(
-                  key: _formKey,
-                  child: Column(
-                    children: <Widget>[
-                      Padding(
-                        padding: const EdgeInsets.only(top: 40.0, bottom: 10.0),
-                        child: SizedBox(
+      body: BlocListener<UsersCubit, UsersState>(
+        listener: (context, state) {
+          if (state is UsersSuccess) {
+            Navigator.pop(context);
+            ScaffoldMessenger.of(context)
+              ..hideCurrentSnackBar()
+              ..showSnackBar(const SnackBar(
+                content: Text('Operação realizada com sucesso'),
+              ));
+          } else if (state is UsersFailure) {
+            Navigator.pop(context);
+            ScaffoldMessenger.of(context)
+              ..hideCurrentSnackBar()
+              ..showSnackBar(const SnackBar(
+                content: Text('Erro'),
+              ));
+          }
+        },
+        child: SingleChildScrollView(
+          physics: BouncingScrollPhysics(),
+          child: Padding(
+            padding: const EdgeInsets.only(top: 20.0),
+            child: Container(
+              child: Column(
+                children: [
+                  Image.asset(
+                    'assets/images/login.png',
+                    height: 350,
+                    width: 600,
+                  ),
+                  Form(
+                    key: _formKey,
+                    child: Column(
+                      children: <Widget>[
+                        Padding(
+                          padding:
+                              const EdgeInsets.only(top: 40.0, bottom: 10.0),
+                          child: SizedBox(
+                            width: 340,
+                            child: TextFormField(
+                              keyboardType: TextInputType.visiblePassword,
+                              obscureText: _obscured,
+                              controller: _emailController,
+                              decoration: InputDecoration(
+                                floatingLabelBehavior:
+                                    FloatingLabelBehavior.never,
+                                labelText: "Email",
+                                filled: true,
+                                fillColor: Colors.grey[300],
+                                isDense: true,
+                                border: OutlineInputBorder(
+                                  borderSide: BorderSide.none,
+                                  borderRadius: BorderRadius.circular(25),
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                        SizedBox(
                           width: 340,
                           child: TextFormField(
                             keyboardType: TextInputType.visiblePassword,
                             obscureText: _obscured,
-                            controller: _emailController,
+                            focusNode: textFieldFocusNode,
+                            controller: _passwordController,
                             decoration: InputDecoration(
                               floatingLabelBehavior:
                                   FloatingLabelBehavior.never,
-                              labelText: "Email",
+                              labelText: "Password",
                               filled: true,
                               fillColor: Colors.grey[300],
                               isDense: true,
@@ -263,91 +304,72 @@ class LoginPage extends StatelessWidget {
                                 borderSide: BorderSide.none,
                                 borderRadius: BorderRadius.circular(25),
                               ),
-                            ),
-                          ),
-                        ),
-                      ),
-                      SizedBox(
-                        width: 340,
-                        child: TextFormField(
-                          keyboardType: TextInputType.visiblePassword,
-                          obscureText: _obscured,
-                          focusNode: textFieldFocusNode,
-                          controller: _passwordController,
-                          decoration: InputDecoration(
-                            floatingLabelBehavior: FloatingLabelBehavior.never,
-                            labelText: "Password",
-                            filled: true,
-                            fillColor: Colors.grey[300],
-                            isDense: true,
-                            border: OutlineInputBorder(
-                              borderSide: BorderSide.none,
-                              borderRadius: BorderRadius.circular(25),
-                            ),
-                            prefixIcon:
-                                const Icon(Icons.lock_rounded, size: 24),
-                            suffixIcon: Padding(
-                              padding: const EdgeInsets.fromLTRB(0, 0, 4, 0),
-                              child: GestureDetector(
-                                onTap: _toggleObscured,
-                                child: Icon(
-                                  _obscured
-                                      ? Icons.visibility_rounded
-                                      : Icons.visibility_off_rounded,
-                                  size: 24,
+                              prefixIcon:
+                                  const Icon(Icons.lock_rounded, size: 24),
+                              suffixIcon: Padding(
+                                padding: const EdgeInsets.fromLTRB(0, 0, 4, 0),
+                                child: GestureDetector(
+                                  onTap: _toggleObscured,
+                                  child: Icon(
+                                    _obscured
+                                        ? Icons.visibility_rounded
+                                        : Icons.visibility_off_rounded,
+                                    size: 24,
+                                  ),
                                 ),
                               ),
                             ),
                           ),
                         ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.only(top: 10.0),
-                        child: SizedBox(
-                          width: 340,
-                          height: 50,
-                          child: BlocBuilder<UserValidationCubit,
-                              UserValidationState>(
-                            builder: (context, state) {
-                              return Padding(
-                                padding: const EdgeInsets.all(0.1),
-                                child: ElevatedButton(
-                                  onPressed: () {
-                                    //fechar teclado
-                                    FocusScope.of(context).unfocus();
-                                    context.read<UsersCubit>().postLogin(
-                                        _emailController.text,
-                                        _passwordController.text);
-                                  },
-                                  style: ElevatedButton.styleFrom(
-                                    shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(25),
+                        Padding(
+                          padding: const EdgeInsets.only(top: 10.0),
+                          child: SizedBox(
+                            width: 340,
+                            height: 50,
+                            child: BlocBuilder<UserValidationCubit,
+                                UserValidationState>(
+                              builder: (context, state) {
+                                return Padding(
+                                  padding: const EdgeInsets.all(0.1),
+                                  child: ElevatedButton(
+                                    onPressed: () {
+                                      //fechar teclado
+                                      FocusScope.of(context).unfocus();
+                                      context.read<UsersCubit>().postLogin(
+                                          _emailController.text,
+                                          _passwordController.text);
+                                    },
+                                    style: ElevatedButton.styleFrom(
+                                      shape: RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.circular(25),
+                                      ),
+                                      backgroundColor: const Color(0xFF706CD8),
                                     ),
-                                    backgroundColor: const Color(0xFF706CD8),
+                                    child: Text('LOGIN'),
                                   ),
-                                  child: Text('LOGIN'),
-                                ),
-                              );
-                            },
+                                );
+                              },
+                            ),
                           ),
                         ),
-                      ),
-                      TextButton(
-                        onPressed: () {
-                          Navigator.of(context).pushNamed(
-                            '/signup',
-                          );
-                        },
-                        style: TextButton.styleFrom(primary: Color(0xFF706CD8)),
-                        child: const Text(
-                          'Você não tem conta? Cadastrar',
-                          textAlign: TextAlign.center,
+                        TextButton(
+                          onPressed: () {
+                            Navigator.of(context).pushNamed(
+                              '/signup',
+                            );
+                          },
+                          style:
+                              TextButton.styleFrom(primary: Color(0xFF706CD8)),
+                          child: const Text(
+                            'Você não tem conta? Cadastrar',
+                            textAlign: TextAlign.center,
+                          ),
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
           ),
         ),
