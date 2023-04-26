@@ -14,9 +14,4 @@ export class AuthGrpcController {
         return await this.authService.login(data.email, data.password);
     }
 
-    @GrpcMethod('AuthService', 'Verify')
-    async Verify(data: { token: string }) {
-        return await this.authService.verifyToken(data.token);
-    }
-
 }

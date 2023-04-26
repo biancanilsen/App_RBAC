@@ -3,6 +3,9 @@ import { ConfigModule } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { UserModule } from './app/module/user.module';
 import { AuthModule } from './app/module/auth.module';
+import { APP_FILTER } from '@nestjs/core';
+import { ExceptionFilter } from './app/rpc-exception';
+
 
 @Module({
   imports: [ConfigModule.forRoot(),
@@ -17,6 +20,8 @@ import { AuthModule } from './app/module/auth.module';
     entities: [__dirname + '/**/*.entity{.js,.ts}']
   }), UserModule, AuthModule]
   , controllers: [],
-  providers: [],
+  providers: [
+
+  ],
 })
 export class AppModule { }

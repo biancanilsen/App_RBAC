@@ -20,7 +20,7 @@ export class UserService {
         try {
             // return await this.userRepository.find(options);
             const users = await this.userRepository.find({
-                select: ['id', 'name', 'email']
+                select: ['id', 'name', 'email', 'role']
             })
             let data = {
                 users
