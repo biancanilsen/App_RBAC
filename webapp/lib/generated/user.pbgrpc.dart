@@ -66,6 +66,8 @@ class UserServiceClient extends $grpc.Client {
       {$grpc.CallOptions? options}) {
     return $createUnaryCall(_$delete, request, options: options);
   }
+
+  index($1.Empty request) {}
 }
 
 abstract class UserServiceBase extends $grpc.Service {

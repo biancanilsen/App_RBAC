@@ -20,7 +20,7 @@ class ServiceClient {
     client = ClientChannel(
       '172.16.8.73',
       port: 3000,
-      options: ChannelOptions(
+      options: const ChannelOptions(
         credentials: ChannelCredentials.insecure(),
       ),
     );
@@ -47,51 +47,30 @@ class ServiceClient {
     await client.shutdown();
   }
 
-  // Future<UserResponse> updateUsers(UserResponse model) async {
-  //   try {
-  //     if (stub == null) {
-  //       throw Exception('Stub has not been initialized');
-  //     }
-  //     final request;
+  Future<UserResponse> postRegister(UserResponse model) async {
+    try {
+      if (stub == null) {
+        Init();
+        if (stub == null) {
+          throw Exception('Failed to initialize stub');
+        }
+      }
+      final request;
 
-  //     if (model.id == '') {
-  //       request = UserRequest(
-  //         name: model.name,
-  //         phone: model.phone,
-  //         email: model.email,
-  //       );
-  //     } else {
-  //       request = UserRequest(
-  //         id: model.id,
-  //         name: model.name,
-  //         phone: model.phone,
-  //         email: model.email,
-  //       );
-  //     }
+      request = CreateUserResquest(
+        name: model.name,
+        email: model.email,
+        password: model.password,
+      );
 
-  //     final response = await stub?.create(request);
-  //     return response!;
-  //   } catch (e) {
-  //     print('Caught error: $e');
-  //     throw Exception('Error getting users: $e');
-  //   }
-  // }
+      final response = await stub?.create(request);
 
-  // Future<Empty> deleteUsers(String id) async {
-  //   try {
-  //     if (stub == null) {
-  //       throw Exception('Stub has not been initialized');
-  //     }
-  //     final request = idRequest(
-  //       id: id,
-  //     );
-  //     final response = await stub?.delete(request);
-  //     return Empty();
-  //   } catch (e) {
-  //     print('Caught error: $e');
-  //     throw Exception('Error getting users: $e');
-  //   }
-  // }
+      return response!;
+    } catch (e) {
+      print('Caught error: $e');
+      throw Exception('Error getting users: $e');
+    }
+  }
 }
 
 class MyRequest {}

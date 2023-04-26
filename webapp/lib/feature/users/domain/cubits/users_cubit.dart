@@ -19,6 +19,19 @@ class UsersCubit extends Cubit<UsersState> {
 
   final ServiceClient _serviceClient;
 
+  Future<void> postRegister(String name, String email, String password) async {
+    UserResponse loginUser =
+        UserResponse(name: name, email: email, password: password);
+    emit(const UsersLoading());
+    await Future.delayed(const Duration(seconds: 1));
+    try {
+      await _serviceClient.postRegister(loginUser);
+      emit(const UsersSuccess());
+    } on Exception {
+      emit(const UsersFailure());
+    }
+  }
+
   Future<void> getUsers() async {
     emit(const UsersLoading());
     try {

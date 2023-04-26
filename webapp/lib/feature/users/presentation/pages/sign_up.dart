@@ -1,28 +1,44 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import '../../domain/cubits/user_validation_cubit.dart';
+import '../../domain/cubits/users_cubit.dart';
+import '../../services/grpc_service.dart';
 
-class SignUpPage extends StatefulWidget {
+class SignUpPage extends StatelessWidget {
   SignUpPage({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider<UsersCubit>(
+          create: (_) => UsersCubit(serviceClient: ServiceClient()),
+        ),
+        BlocProvider<UserValidationCubit>(
+          create: (_) => UserValidationCubit(),
+        ),
+      ],
+      child: RegisterPage(),
+    );
+  }
+}
+
+class RegisterPage extends StatelessWidget {
   final TextEditingController _nameController = TextEditingController();
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
-
-  @override
-  State<SignUpPage> createState() => _SignUpPageState();
-}
-
-class _SignUpPageState extends State<SignUpPage> {
   final _formKey = GlobalKey<FormState>();
   final textFieldFocusNode = FocusNode();
   bool _obscured = false;
 
   void _toggleObscured() {
-    setState(() {
-      _obscured = !_obscured;
-      if (textFieldFocusNode.hasPrimaryFocus) return;
-      textFieldFocusNode.canRequestFocus = false;
-    });
+    // setState(() {
+    //   _obscured = !_obscured;
+    //   if (textFieldFocusNode.hasPrimaryFocus) return;
+    //   textFieldFocusNode.canRequestFocus = false;
+    // });
   }
 
   @override
@@ -57,6 +73,7 @@ class _SignUpPageState extends State<SignUpPage> {
                         child: TextFormField(
                           keyboardType: TextInputType.visiblePassword,
                           obscureText: _obscured,
+                          controller: _nameController,
                           decoration: InputDecoration(
                             floatingLabelBehavior: FloatingLabelBehavior.never,
                             labelText: "Nome",
@@ -78,6 +95,7 @@ class _SignUpPageState extends State<SignUpPage> {
                         child: TextFormField(
                           keyboardType: TextInputType.visiblePassword,
                           obscureText: _obscured,
+                          controller: _emailController,
                           decoration: InputDecoration(
                             floatingLabelBehavior: FloatingLabelBehavior.never,
                             labelText: "Email",
@@ -100,6 +118,7 @@ class _SignUpPageState extends State<SignUpPage> {
                           keyboardType: TextInputType.visiblePassword,
                           obscureText: _obscured,
                           focusNode: textFieldFocusNode,
+                          controller: _passwordController,
                           decoration: InputDecoration(
                             floatingLabelBehavior: FloatingLabelBehavior.never,
                             labelText: "Password",
@@ -132,19 +151,30 @@ class _SignUpPageState extends State<SignUpPage> {
                       child: SizedBox(
                         width: 340,
                         height: 50,
-                        child: ElevatedButton(
-                          onPressed: () {
-                            Navigator.of(context).pushNamed(
-                              '/signin',
+                        child: BlocBuilder<UserValidationCubit,
+                            UserValidationState>(
+                          builder: (context, state) {
+                            return Padding(
+                              padding: const EdgeInsets.all(0.1),
+                              child: ElevatedButton(
+                                onPressed: () {
+                                  //fechar teclado
+                                  FocusScope.of(context).unfocus();
+                                  context.read<UsersCubit>().postRegister(
+                                      _nameController.text,
+                                      _emailController.text,
+                                      _passwordController.text);
+                                },
+                                style: ElevatedButton.styleFrom(
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(25),
+                                  ),
+                                  backgroundColor: const Color(0xFF706CD8),
+                                ),
+                                child: Text('CADASTRAR'),
+                              ),
                             );
                           },
-                          style: ElevatedButton.styleFrom(
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(25),
-                            ),
-                            backgroundColor: const Color(0xFF706CD8),
-                          ),
-                          child: Text('CADASTRAR'),
                         ),
                       ),
                     ),
