@@ -6,25 +6,25 @@ abstract class UserValidationState extends Equatable {
 
 class UserValidating extends UserValidationState {
   const UserValidating({
-    this.tituloMessage,
-    this.conteudoMessage,
+    this.emailMessage,
+    this.passwordMessage,
   });
 
-  final String? tituloMessage;
-  final String? conteudoMessage;
+  final String? emailMessage;
+  final String? passwordMessage;
 
   UserValidating copyWith({
-    String? tituloMessage,
+    String? emailMessage,
     String? conteudoMessage,
   }) {
     return UserValidating(
-      tituloMessage: tituloMessage ?? this.tituloMessage,
-      conteudoMessage: conteudoMessage ?? this.conteudoMessage,
+      emailMessage: emailMessage ?? this.emailMessage,
+      passwordMessage: passwordMessage ?? this.passwordMessage,
     );
   }
 
   @override
-  List<Object?> get props => [tituloMessage, conteudoMessage];
+  List<Object?> get props => [emailMessage, passwordMessage];
 }
 
 class UserValidated extends UserValidationState {

@@ -48,7 +48,7 @@ class _PortalPageState extends State<PortalPage> {
                       ),
                       backgroundColor: const Color(0xFF706CD8),
                     ),
-                    child: Text('LOGIN'),
+                    child: Text('SIGNIN'),
                   ),
                 ),
               ),

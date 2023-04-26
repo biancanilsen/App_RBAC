@@ -6,29 +6,29 @@ part 'user_validation_state.dart';
 class UserValidationCubit extends Cubit<UserValidationState> {
   UserValidationCubit() : super(const UserValidating());
 
-  void validaForm(String titulo, String conteudo) {
-    String cubitTituloMessage = '';
-    String cubitConteudoMessage = '';
+  void validaForm(String email, String password) {
+    String cubitEmailMessage = '';
+    String cubitPasswordMessage = '';
     bool formInvalid;
 
     formInvalid = false;
-    if (titulo == '') {
+    if (email == '') {
       formInvalid = true;
-      cubitTituloMessage = 'Preencha o título';
+      cubitEmailMessage = 'Preencha o email';
     } else {
-      cubitTituloMessage = '';
+      cubitEmailMessage = '';
     }
-    if (conteudo == '') {
+    if (password == '') {
       formInvalid = true;
-      cubitConteudoMessage = 'Preencha o conteúdo';
+      cubitPasswordMessage = 'Preencha a  senha';
     } else {
-      cubitConteudoMessage = '';
+      cubitPasswordMessage = '';
     }
 
     if (formInvalid == true) {
       emit(UserValidating(
-        tituloMessage: cubitTituloMessage,
-        conteudoMessage: cubitConteudoMessage,
+        emailMessage: cubitEmailMessage,
+        passwordMessage: cubitPasswordMessage,
       ));
     } else {
       emit(const UserValidated());

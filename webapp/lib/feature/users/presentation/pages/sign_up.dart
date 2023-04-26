@@ -25,20 +25,25 @@ class SignUpPage extends StatelessWidget {
   }
 }
 
-class RegisterPage extends StatelessWidget {
+class RegisterPage extends StatefulWidget {
+  @override
+  State<RegisterPage> createState() => _RegisterPageState();
+}
+
+class _RegisterPageState extends State<RegisterPage> {
   final TextEditingController _nameController = TextEditingController();
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
   final textFieldFocusNode = FocusNode();
-  bool _obscured = false;
+  bool _obscured = true;
 
   void _toggleObscured() {
-    // setState(() {
-    //   _obscured = !_obscured;
-    //   if (textFieldFocusNode.hasPrimaryFocus) return;
-    //   textFieldFocusNode.canRequestFocus = false;
-    // });
+    setState(() {
+      _obscured = !_obscured;
+      if (textFieldFocusNode.hasPrimaryFocus) return;
+      textFieldFocusNode.canRequestFocus = false;
+    });
   }
 
   @override
@@ -66,7 +71,7 @@ class RegisterPage extends StatelessWidget {
             ScaffoldMessenger.of(context)
               ..hideCurrentSnackBar()
               ..showSnackBar(const SnackBar(
-                content: Text('Erro'),
+                content: Text('Ops, tente novamente'),
               ));
           }
         },
@@ -86,89 +91,150 @@ class RegisterPage extends StatelessWidget {
                     key: _formKey,
                     child: Column(
                       children: <Widget>[
-                        Padding(
-                          padding: const EdgeInsets.only(top: 70.0),
-                          child: SizedBox(
-                            width: 340,
-                            child: TextFormField(
-                              keyboardType: TextInputType.visiblePassword,
-                              obscureText: _obscured,
-                              controller: _nameController,
-                              decoration: InputDecoration(
-                                floatingLabelBehavior:
-                                    FloatingLabelBehavior.never,
-                                labelText: "Nome",
-                                filled: true,
-                                fillColor: Colors.grey[300],
-                                isDense: true,
-                                border: OutlineInputBorder(
-                                  borderSide: BorderSide.none,
-                                  borderRadius: BorderRadius.circular(25),
+                        BlocBuilder<UserValidationCubit, UserValidationState>(
+                          builder: (context, state) {
+                            return Padding(
+                              padding: const EdgeInsets.only(
+                                  top: 40.0, bottom: 10.0),
+                              child: SizedBox(
+                                width: 340,
+                                child: TextFormField(
+                                  decoration: InputDecoration(
+                                    floatingLabelBehavior:
+                                        FloatingLabelBehavior.never,
+                                    labelText: "Nome",
+                                    filled: true,
+                                    fillColor: Colors.grey[300],
+                                    isDense: true,
+                                    border: OutlineInputBorder(
+                                      borderSide: BorderSide.none,
+                                      borderRadius: BorderRadius.circular(25),
+                                    ),
+                                  ),
+                                  controller: _nameController,
+                                  textInputAction: TextInputAction.next,
+                                  onChanged: (text) {
+                                    context
+                                        .read<UserValidationCubit>()
+                                        .validaForm(_emailController.text,
+                                            _passwordController.text);
+                                  },
+                                  onFieldSubmitted: (String value) {},
+                                  autovalidateMode:
+                                      AutovalidateMode.onUserInteraction,
+                                  validator: (value) {
+                                    if (state is UserValidating) {
+                                      if (state.emailMessage == '') {
+                                        return null;
+                                      } else {
+                                        return state.emailMessage;
+                                      }
+                                    }
+                                  },
                                 ),
                               ),
-                            ),
-                          ),
+                            );
+                          },
                         ),
-                        Padding(
-                          padding: const EdgeInsets.only(top: 10.0),
-                          child: SizedBox(
-                            width: 340,
-                            child: TextFormField(
-                              keyboardType: TextInputType.visiblePassword,
-                              obscureText: _obscured,
-                              controller: _emailController,
-                              decoration: InputDecoration(
-                                floatingLabelBehavior:
-                                    FloatingLabelBehavior.never,
-                                labelText: "Email",
-                                filled: true,
-                                fillColor: Colors.grey[300],
-                                isDense: true,
-                                border: OutlineInputBorder(
-                                  borderSide: BorderSide.none,
-                                  borderRadius: BorderRadius.circular(25),
+                        BlocBuilder<UserValidationCubit, UserValidationState>(
+                          builder: (context, state) {
+                            return Padding(
+                              padding: const EdgeInsets.only(bottom: 10.0),
+                              child: SizedBox(
+                                width: 340,
+                                child: TextFormField(
+                                  decoration: InputDecoration(
+                                    floatingLabelBehavior:
+                                        FloatingLabelBehavior.never,
+                                    labelText: "Email",
+                                    filled: true,
+                                    fillColor: Colors.grey[300],
+                                    isDense: true,
+                                    border: OutlineInputBorder(
+                                      borderSide: BorderSide.none,
+                                      borderRadius: BorderRadius.circular(25),
+                                    ),
+                                  ),
+                                  controller: _emailController,
+                                  textInputAction: TextInputAction.next,
+                                  onChanged: (text) {
+                                    context
+                                        .read<UserValidationCubit>()
+                                        .validaForm(_emailController.text,
+                                            _passwordController.text);
+                                  },
+                                  onFieldSubmitted: (String value) {},
+                                  autovalidateMode:
+                                      AutovalidateMode.onUserInteraction,
+                                  validator: (value) {
+                                    if (state is UserValidating) {
+                                      if (state.emailMessage == '') {
+                                        return null;
+                                      } else {
+                                        return state.emailMessage;
+                                      }
+                                    }
+                                  },
                                 ),
                               ),
-                            ),
-                          ),
+                            );
+                          },
                         ),
-                        Padding(
-                          padding: const EdgeInsets.only(top: 10.0),
-                          child: SizedBox(
-                            width: 340,
-                            child: TextFormField(
-                              keyboardType: TextInputType.visiblePassword,
-                              obscureText: _obscured,
-                              focusNode: textFieldFocusNode,
-                              controller: _passwordController,
-                              decoration: InputDecoration(
-                                floatingLabelBehavior:
-                                    FloatingLabelBehavior.never,
-                                labelText: "Password",
-                                filled: true,
-                                fillColor: Colors.grey[300],
-                                isDense: true,
-                                border: OutlineInputBorder(
-                                  borderSide: BorderSide.none,
-                                  borderRadius: BorderRadius.circular(25),
-                                ),
-                                prefixIcon: Icon(Icons.lock_rounded, size: 24),
-                                suffixIcon: Padding(
-                                  padding:
-                                      const EdgeInsets.fromLTRB(0, 0, 4, 0),
-                                  child: GestureDetector(
-                                    onTap: _toggleObscured,
-                                    child: Icon(
-                                      _obscured
-                                          ? Icons.visibility_rounded
-                                          : Icons.visibility_off_rounded,
-                                      size: 24,
+                        BlocBuilder<UserValidationCubit, UserValidationState>(
+                          builder: (context, state) {
+                            return SizedBox(
+                              width: 340,
+                              child: TextFormField(
+                                decoration: InputDecoration(
+                                  floatingLabelBehavior:
+                                      FloatingLabelBehavior.never,
+                                  labelText: "Password",
+                                  filled: true,
+                                  fillColor: Colors.grey[300],
+                                  isDense: true,
+                                  border: OutlineInputBorder(
+                                    borderSide: BorderSide.none,
+                                    borderRadius: BorderRadius.circular(25),
+                                  ),
+                                  prefixIcon:
+                                      const Icon(Icons.lock_rounded, size: 24),
+                                  suffixIcon: Padding(
+                                    padding:
+                                        const EdgeInsets.fromLTRB(0, 0, 4, 0),
+                                    child: GestureDetector(
+                                      onTap: _toggleObscured,
+                                      child: Icon(
+                                        _obscured
+                                            ? Icons.visibility_rounded
+                                            : Icons.visibility_off_rounded,
+                                        size: 24,
+                                      ),
                                     ),
                                   ),
                                 ),
+                                controller: _passwordController,
+                                textInputAction: TextInputAction.next,
+                                onChanged: (text) {
+                                  context
+                                      .read<UserValidationCubit>()
+                                      .validaForm(_emailController.text,
+                                          _passwordController.text);
+                                },
+                                onFieldSubmitted: (String value) {},
+                                autovalidateMode:
+                                    AutovalidateMode.onUserInteraction,
+                                validator: (value) {
+                                  if (state is UserValidating) {
+                                    if (state.passwordMessage == '') {
+                                      return null;
+                                    } else {
+                                      return state.passwordMessage;
+                                    }
+                                  }
+                                },
                               ),
-                            ),
-                          ),
+                            );
+                          },
                         ),
                         Padding(
                           padding: const EdgeInsets.only(top: 10.0),
