@@ -104,6 +104,30 @@ class ServiceClient {
     }
   }
 
+  Future<UserResponse> updateUser(UserResponse model) async {
+    try {
+      if (stub == null) {
+        Init();
+        if (stub == null) {
+          throw Exception('Failed to initialize authStub');
+        }
+      }
+      final request;
+
+      request = UpdateUserResponse(
+        id: model.id,
+        name: model.name,
+        email: model.email,
+        password: model.password,
+      );
+      final response = await stub?.update(request);
+      return response!;
+    } catch (e) {
+      print('Caught error: $e');
+      throw Exception('Error getting guests: $e');
+    }
+  }
+
   Future<Empty> deleteUser(String id) async {
     try {
       if (stub == null) {

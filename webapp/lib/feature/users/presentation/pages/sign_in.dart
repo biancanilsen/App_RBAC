@@ -225,7 +225,7 @@ class _LoginPageState extends State<LoginPage> {
                                     ),
                                     backgroundColor: const Color(0xFF706CD8),
                                   ),
-                                  child: const Text('Login'),
+                                  child: const Text('LOGIN'),
                                 );
                               },
                             ),

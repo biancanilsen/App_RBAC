@@ -7,6 +7,7 @@ import 'package:flutter/cupertino.dart';
 import '../../data/models/user_model.dart';
 import '../../domain/cubits/users_cubit.dart';
 import '../../services/grpc_service.dart';
+import 'edit_user.dart';
 
 class ListUsersPage extends StatelessWidget {
   const ListUsersPage({Key? key}) : super(key: key);
@@ -36,7 +37,7 @@ class UsersView extends StatelessWidget {
         centerTitle: true,
         elevation: 0,
       ),
-      body: _Content(),
+      body: const _Content(),
     );
   }
 }
@@ -54,7 +55,6 @@ class _Content extends StatelessWidget {
         child: CircularProgressIndicator.adaptive(),
       );
     } else if (state is UsersLoaded) {
-      //a mensagem abaixo aparece se a lista de notas estiver vazia
       if (state.users?.isEmpty ?? true) {
         return const Center(
           child:
@@ -88,7 +88,7 @@ class _UsersList extends StatelessWidget {
                 tileColor: Colors.white,
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(10.0),
-                  side: BorderSide(color: Colors.grey, width: 1),
+                  side: const BorderSide(color: Colors.grey, width: 1),
                 ),
                 title: Text(user.name),
                 subtitle: Text(
@@ -98,13 +98,11 @@ class _UsersList extends StatelessWidget {
                   IconButton(
                     icon: const Icon(Icons.edit),
                     onPressed: () {
-                      // Navigator.push(
-                      //   // context,
-                      //   // MaterialPageRoute(
-                      //   //     // O convidado existente eh enviada como parametro para a
-                      //   //     // tela de edicao preencher os campos automaticamente
-                      //   //     builder: (context) => UserEditPage(user: user)),
-                      // );
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => EditUserpage(user: user)),
+                      );
                     },
                   ),
                   IconButton(

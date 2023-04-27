@@ -14,13 +14,13 @@ class UserValidationCubit extends Cubit<UserValidationState> {
     formInvalid = false;
     if (email == '') {
       formInvalid = true;
-      cubitEmailMessage = 'Preencha o email';
+      cubitEmailMessage = 'Campo obrigatório';
     } else {
       cubitEmailMessage = '';
     }
     if (password == '') {
       formInvalid = true;
-      cubitPasswordMessage = 'Preencha a  senha';
+      cubitPasswordMessage = 'Campo obrigatório';
     } else {
       cubitPasswordMessage = '';
     }

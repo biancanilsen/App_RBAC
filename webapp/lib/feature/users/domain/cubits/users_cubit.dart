@@ -65,11 +65,22 @@ class UsersCubit extends Cubit<UsersState> {
     }
   }
 
+  Future<void> updateUser(
+      String? id, String name, String email, String password) async {
+    UserResponse editUser =
+        UserResponse(id: id, name: name, email: email, password: password);
+    emit(const UsersLoading());
+    await Future.delayed(const Duration(seconds: 2));
+    try {
+      editUser = await _serviceClient.updateUser(editUser);
+      emit(const UsersSuccess());
+    } on Exception {
+      emit(const UsersFailure());
+    }
+  }
+
   Future<void> deleteUser(id) async {
     emit(const UsersLoading());
-
-    // A linha abaixo nesse cubit simula tempo de processamento no servidor
-    // serve para testar o circular indicator
     await Future.delayed(const Duration(seconds: 1));
     try {
       await _serviceClient.deleteUser(id);
