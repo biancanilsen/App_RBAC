@@ -1,4 +1,5 @@
 import { IsOptional } from "class-validator";
+import { Role } from "../enum/role.enum";
 
 export class UpdateUserDto {
     @IsOptional()
@@ -12,4 +13,7 @@ export class UpdateUserDto {
 
     @IsOptional()
     password: string;
+
+    @IsOptional()
+    role: Role;
 }
