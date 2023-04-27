@@ -19,8 +19,6 @@ export class UserGrpcController {
     constructor(private userService: UserService) { }
 
     @GrpcMethod('UserService', 'Create')
-    @UseGuards(PoliciesGuard)
-    @CheckPolicies(new CreateUserPolicyHandler())
     async Create(data: CreateUserDto, metadata: Metadata, call: ServerUnaryCall<CreateUserDto, any>) {
         return await this.userService.store(data);
     }
