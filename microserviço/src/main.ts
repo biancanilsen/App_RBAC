@@ -9,8 +9,8 @@ async function bootstrap() {
     transport: Transport.GRPC,
     options: {
       url: 'localhost:3000',
-      package: ['user', 'auth'],
-      protoPath: [path.join(__dirname, 'app/proto/user.proto'), path.join(__dirname, 'app/proto/auth.proto')],
+      package: ['user', 'auth', 'upload'],
+      protoPath: [path.join(__dirname, 'app/proto/user.proto'), path.join(__dirname, 'app/proto/auth.proto'), path.join(__dirname, 'app/proto/upload.proto')],
       loaders: {
         enums: String,
         objects: true,
