@@ -110,7 +110,6 @@ class _UsersList extends StatelessWidget {
                   IconButton(
                       icon: const Icon(Icons.delete),
                       onPressed: () {
-                        // Excluir convidado atraves do id
                         context.read<UsersCubit>().deleteUser(user.id);
                         (UsersLoaded(
                           users: users,

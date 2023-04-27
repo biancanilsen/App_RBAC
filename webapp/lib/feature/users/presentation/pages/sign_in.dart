@@ -237,8 +237,8 @@ class _LoginPageState extends State<LoginPage> {
                               '/signup',
                             );
                           },
-                          style:
-                              TextButton.styleFrom(primary: Color(0xFF706CD8)),
+                          style: TextButton.styleFrom(
+                              foregroundColor: const Color(0xFF706CD8)),
                           child: const Text(
                             'Você não tem conta? Cadastrar',
                             textAlign: TextAlign.center,

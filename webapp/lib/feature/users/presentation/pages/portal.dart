@@ -23,59 +23,57 @@ class _PortalPageState extends State<PortalPage> {
       backgroundColor: Colors.white,
       body: Padding(
         padding: const EdgeInsets.only(top: 20.0),
-        child: Container(
-          child: Column(
-            children: [
-              Image.asset(
-                'assets/images/backgroudPortal.jpg',
-                height: 400,
-                width: 400,
-              ),
-              Padding(
-                padding: const EdgeInsets.only(top: 60.0),
-                child: SizedBox(
-                  width: 340,
-                  height: 50,
-                  child: ElevatedButton(
-                    onPressed: () {
-                      Navigator.of(context).pushNamed(
-                        '/signin',
-                      );
-                    },
-                    style: ElevatedButton.styleFrom(
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(25),
-                      ),
-                      backgroundColor: const Color(0xFF706CD8),
+        child: Column(
+          children: [
+            Image.asset(
+              'assets/images/backgroudPortal.jpg',
+              height: 400,
+              width: 400,
+            ),
+            Padding(
+              padding: const EdgeInsets.only(top: 60.0),
+              child: SizedBox(
+                width: 340,
+                height: 50,
+                child: ElevatedButton(
+                  onPressed: () {
+                    Navigator.of(context).pushNamed(
+                      '/signin',
+                    );
+                  },
+                  style: ElevatedButton.styleFrom(
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(25),
                     ),
-                    child: Text('SIGNIN'),
+                    backgroundColor: const Color(0xFF706CD8),
                   ),
+                  child: const Text('SIGNIN'),
                 ),
               ),
-              Padding(
-                padding: const EdgeInsets.only(top: 15.0),
-                child: SizedBox(
-                  width: 340,
-                  height: 50,
-                  child: ElevatedButton(
-                    onPressed: () {
-                      Navigator.of(context).pushNamed(
-                        '/signup',
-                      );
-                    },
-                    style: ElevatedButton.styleFrom(
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(25),
-                      ),
-                      backgroundColor: Colors.grey[200],
-                      foregroundColor: const Color(0xFF706CD8),
+            ),
+            Padding(
+              padding: const EdgeInsets.only(top: 15.0),
+              child: SizedBox(
+                width: 340,
+                height: 50,
+                child: ElevatedButton(
+                  onPressed: () {
+                    Navigator.of(context).pushNamed(
+                      '/signup',
+                    );
+                  },
+                  style: ElevatedButton.styleFrom(
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(25),
                     ),
-                    child: Text('SIGNUP'),
+                    backgroundColor: Colors.grey[200],
+                    foregroundColor: const Color(0xFF706CD8),
                   ),
+                  child: const Text('SIGNUP'),
                 ),
               ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );
