@@ -70,7 +70,7 @@ class UsersCubit extends Cubit<UsersState> {
     UserResponse editUser =
         UserResponse(id: id, name: name, email: email, password: password);
     emit(const UsersLoading());
-    await Future.delayed(const Duration(seconds: 2));
+    await Future.delayed(const Duration(seconds: 1));
     try {
       editUser = await _serviceClient.updateUser(editUser);
       emit(const UsersSuccess());

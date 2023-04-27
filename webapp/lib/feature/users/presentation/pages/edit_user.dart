@@ -81,20 +81,6 @@ class _UsersEditViewState extends State<UsersEditView> {
         centerTitle: true,
         elevation: 0,
       ),
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-      bottomNavigationBar: BottomAppBar(
-        color: Color(0xFF706CD8),
-        shape: CircularNotchedRectangle(),
-        child: Container(
-          height: 60,
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.only(
-              topLeft: Radius.circular(10),
-              topRight: Radius.circular(10),
-            ),
-          ),
-        ),
-      ),
       body: BlocListener<UsersCubit, UsersState>(
         listener: (context, state) {
           if (state is UsersInitial) {
@@ -135,137 +121,135 @@ class _UsersEditViewState extends State<UsersEditView> {
             padding: const EdgeInsets.only(top: 20.0),
             child: Column(
               children: [
-                Image.asset(
-                  'assets/images/register.png',
-                  height: 300,
-                  width: 600,
-                ),
-                Form(
-                  key: _formKey,
-                  child: Column(
-                    children: <Widget>[
-                      BlocBuilder<UserValidationCubit, UserValidationState>(
-                        builder: (context, state) {
-                          return Padding(
-                            padding:
-                                const EdgeInsets.only(top: 40.0, bottom: 10.0),
-                            child: SizedBox(
-                              width: 340,
-                              child: TextFormField(
-                                decoration: InputDecoration(
-                                  floatingLabelBehavior:
-                                      FloatingLabelBehavior.never,
-                                  labelText: "Nome",
-                                  filled: true,
-                                  fillColor: Colors.grey[300],
-                                  isDense: true,
-                                  border: OutlineInputBorder(
-                                    borderSide: BorderSide.none,
-                                    borderRadius: BorderRadius.circular(25),
-                                  ),
-                                ),
-                                controller: _nameController,
-                                textInputAction: TextInputAction.next,
-                                onChanged: (text) {
-                                  context
-                                      .read<UserValidationCubit>()
-                                      .validaForm(_emailController.text,
-                                          _passwordController.text);
-                                },
-                                onFieldSubmitted: (String value) {},
-                                autovalidateMode:
-                                    AutovalidateMode.onUserInteraction,
-                                validator: (value) {
-                                  if (state is UserValidating) {
-                                    if (state.emailMessage == '') {
-                                      return null;
-                                    } else {
-                                      return state.emailMessage;
-                                    }
-                                  }
-                                },
-                              ),
-                            ),
-                          );
-                        },
-                      ),
-                      BlocBuilder<UserValidationCubit, UserValidationState>(
-                        builder: (context, state) {
-                          return Padding(
-                            padding: const EdgeInsets.only(bottom: 10.0),
-                            child: SizedBox(
-                              width: 340,
-                              child: TextFormField(
-                                decoration: InputDecoration(
-                                  floatingLabelBehavior:
-                                      FloatingLabelBehavior.never,
-                                  labelText: "Email",
-                                  filled: true,
-                                  fillColor: Colors.grey[300],
-                                  isDense: true,
-                                  border: OutlineInputBorder(
-                                    borderSide: BorderSide.none,
-                                    borderRadius: BorderRadius.circular(25),
-                                  ),
-                                ),
-                                controller: _emailController,
-                                textInputAction: TextInputAction.next,
-                                onChanged: (text) {
-                                  context
-                                      .read<UserValidationCubit>()
-                                      .validaForm(_emailController.text,
-                                          _passwordController.text);
-                                },
-                                onFieldSubmitted: (String value) {},
-                                autovalidateMode:
-                                    AutovalidateMode.onUserInteraction,
-                                validator: (value) {
-                                  if (state is UserValidating) {
-                                    if (state.emailMessage == '') {
-                                      return null;
-                                    } else {
-                                      return state.emailMessage;
-                                    }
-                                  }
-                                },
-                              ),
-                            ),
-                          );
-                        },
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.only(top: 10.0),
-                        child: SizedBox(
-                          width: 340,
-                          height: 50,
-                          child: BlocBuilder<UserValidationCubit,
-                              UserValidationState>(
-                            builder: (context, state) {
-                              return Padding(
-                                padding: const EdgeInsets.all(0.1),
-                                child: ElevatedButton(
-                                  onPressed: () {
-                                    FocusScope.of(context).unfocus();
-                                    context.read<UsersCubit>().updateUser(
-                                        user?.id,
-                                        _nameController.text,
-                                        _emailController.text,
-                                        _passwordController.text);
-                                  },
-                                  style: ElevatedButton.styleFrom(
-                                    shape: RoundedRectangleBorder(
+                Padding(
+                  padding: const EdgeInsets.only(top: 200.0, left: 28),
+                  child: Form(
+                    key: _formKey,
+                    child: Column(
+                      children: <Widget>[
+                        BlocBuilder<UserValidationCubit, UserValidationState>(
+                          builder: (context, state) {
+                            return Padding(
+                              padding: const EdgeInsets.only(
+                                  top: 40.0, bottom: 10.0),
+                              child: SizedBox(
+                                width: 340,
+                                child: TextFormField(
+                                  decoration: InputDecoration(
+                                    floatingLabelBehavior:
+                                        FloatingLabelBehavior.never,
+                                    labelText: "Nome",
+                                    filled: true,
+                                    fillColor: Colors.grey[300],
+                                    isDense: true,
+                                    border: OutlineInputBorder(
+                                      borderSide: BorderSide.none,
                                       borderRadius: BorderRadius.circular(25),
                                     ),
-                                    backgroundColor: const Color(0xFF706CD8),
                                   ),
-                                  child: const Text('SALVAR'),
+                                  controller: _nameController,
+                                  textInputAction: TextInputAction.next,
+                                  onChanged: (text) {
+                                    context
+                                        .read<UserValidationCubit>()
+                                        .validaForm(_emailController.text,
+                                            _passwordController.text);
+                                  },
+                                  onFieldSubmitted: (String value) {},
+                                  autovalidateMode:
+                                      AutovalidateMode.onUserInteraction,
+                                  validator: (value) {
+                                    if (state is UserValidating) {
+                                      if (state.emailMessage == '') {
+                                        return null;
+                                      } else {
+                                        return state.emailMessage;
+                                      }
+                                    }
+                                  },
                                 ),
-                              );
-                            },
+                              ),
+                            );
+                          },
+                        ),
+                        BlocBuilder<UserValidationCubit, UserValidationState>(
+                          builder: (context, state) {
+                            return Padding(
+                              padding: const EdgeInsets.only(bottom: 10.0),
+                              child: SizedBox(
+                                width: 340,
+                                child: TextFormField(
+                                  decoration: InputDecoration(
+                                    floatingLabelBehavior:
+                                        FloatingLabelBehavior.never,
+                                    labelText: "Email",
+                                    filled: true,
+                                    fillColor: Colors.grey[300],
+                                    isDense: true,
+                                    border: OutlineInputBorder(
+                                      borderSide: BorderSide.none,
+                                      borderRadius: BorderRadius.circular(25),
+                                    ),
+                                  ),
+                                  controller: _emailController,
+                                  textInputAction: TextInputAction.next,
+                                  onChanged: (text) {
+                                    context
+                                        .read<UserValidationCubit>()
+                                        .validaForm(_emailController.text,
+                                            _passwordController.text);
+                                  },
+                                  onFieldSubmitted: (String value) {},
+                                  autovalidateMode:
+                                      AutovalidateMode.onUserInteraction,
+                                  validator: (value) {
+                                    if (state is UserValidating) {
+                                      if (state.emailMessage == '') {
+                                        return null;
+                                      } else {
+                                        return state.emailMessage;
+                                      }
+                                    }
+                                  },
+                                ),
+                              ),
+                            );
+                          },
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.only(top: 10.0),
+                          child: SizedBox(
+                            width: 340,
+                            height: 50,
+                            child: BlocBuilder<UserValidationCubit,
+                                UserValidationState>(
+                              builder: (context, state) {
+                                return Padding(
+                                  padding: const EdgeInsets.all(0.1),
+                                  child: ElevatedButton(
+                                    onPressed: () {
+                                      FocusScope.of(context).unfocus();
+                                      context.read<UsersCubit>().updateUser(
+                                          user?.id,
+                                          _nameController.text,
+                                          _emailController.text,
+                                          _passwordController.text);
+                                    },
+                                    style: ElevatedButton.styleFrom(
+                                      shape: RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.circular(25),
+                                      ),
+                                      backgroundColor: const Color(0xFF706CD8),
+                                    ),
+                                    child: const Text('SALVAR'),
+                                  ),
+                                );
+                              },
+                            ),
                           ),
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
                 ),
               ],
