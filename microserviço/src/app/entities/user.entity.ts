@@ -1,5 +1,6 @@
 import { hashSync } from "bcrypt";
 import { BeforeInsert, Column, CreateDateColumn, DeleteDateColumn, Entity, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
+import { Role } from "../enum/role.enum";
 
 @Entity()
 export class UserEntity {
@@ -15,6 +16,13 @@ export class UserEntity {
 
     @Column()
     password: string;
+
+    @Column({
+        type: 'enum',
+        enum: Role,
+        default: Role.ADMIN
+    })
+    role: Role;
 
     @CreateDateColumn({ type: 'timestamptz' })
     createdAt?: Date;
