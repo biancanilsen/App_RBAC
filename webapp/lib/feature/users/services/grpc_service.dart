@@ -86,6 +86,39 @@ class ServiceClient {
       throw Exception('Error getting users: $e');
     }
   }
+
+  Future<UsersResponse> getUsers() async {
+    try {
+      if (stub == null) {
+        Init();
+        if (stub == null) {
+          throw Exception('Failed to initialize authStub');
+        }
+      }
+      final request = Empty();
+      final response = await stub?.showAll(request);
+      return response!;
+    } catch (e) {
+      print('Caught error: $e');
+      throw Exception('Error getting guests: $e');
+    }
+  }
+
+  Future<Empty> deleteUser(String id) async {
+    try {
+      if (stub == null) {
+        throw Exception('Stub has not been initialized');
+      }
+      final request = IdRequest(
+        id: id,
+      );
+      final response = await stub?.delete(request);
+      return Empty();
+    } catch (e) {
+      print('Caught error: $e');
+      throw Exception('Error getting guests: $e');
+    }
+  }
 }
 
 class MyRequest {}
