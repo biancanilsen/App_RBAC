@@ -1,3 +1,5 @@
+import 'package:webapp/feature/users/presentation/pages/sign_up.dart';
+
 import '../../domain/cubits/users_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -38,6 +40,54 @@ class UsersView extends StatelessWidget {
         elevation: 0,
       ),
       body: const _Content(),
+      floatingActionButton: Padding(
+        padding: const EdgeInsets.only(top: 20),
+        child: SizedBox(
+          height: 70,
+          width: 70,
+          child: FloatingActionButton(
+            backgroundColor: Colors.transparent,
+            elevation: 0,
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => const SignUpPage()),
+              );
+            },
+            child: Container(
+              height: 70,
+              width: 70,
+              decoration: BoxDecoration(
+                border: Border.all(color: Colors.white, width: 4),
+                shape: BoxShape.circle,
+                gradient: const LinearGradient(
+                  begin: Alignment(0.7, -0.5),
+                  end: Alignment(0.6, 0.5),
+                  colors: [
+                    Color(0xFF706CD8),
+                    Color.fromARGB(255, 117, 164, 177),
+                  ],
+                ),
+              ),
+              child: const Icon(Icons.add, size: 30),
+            ),
+          ),
+        ),
+      ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+      bottomNavigationBar: BottomAppBar(
+        color: const Color(0xFF706CD8),
+        shape: const CircularNotchedRectangle(),
+        child: Container(
+          height: 60,
+          decoration: const BoxDecoration(
+            borderRadius: BorderRadius.only(
+              topLeft: Radius.circular(10),
+              topRight: Radius.circular(10),
+            ),
+          ),
+        ),
+      ),
     );
   }
 }
