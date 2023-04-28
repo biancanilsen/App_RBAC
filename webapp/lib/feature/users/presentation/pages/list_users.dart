@@ -12,7 +12,7 @@ import '../../services/grpc_service.dart';
 import 'edit_user.dart';
 
 class ListUsersPage extends StatelessWidget {
-  const ListUsersPage({Key? key}) : super(key: key);
+  const ListUsersPage({Key? key, String? token}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

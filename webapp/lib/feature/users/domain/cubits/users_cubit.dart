@@ -6,11 +6,15 @@ import '../../../../../generated/user.pb.dart';
 import '../../../../../generated/auth.pb.dart';
 import 'package:flutter/foundation.dart';
 import '../../services/grpc_service.dart';
+import 'package:localstorage/localstorage.dart';
 part 'users_state.dart';
 
 class UsersCubit extends Cubit<UsersState> {
+  final LocalStorage storage = new LocalStorage('token');
+
   Init() {
     late ClientChannel client;
+    AuthResponse hasToken;
   }
 
   UsersCubit({required ServiceClient serviceClient})
@@ -26,7 +30,8 @@ class UsersCubit extends Cubit<UsersState> {
     emit(const UsersLoading());
     await Future.delayed(const Duration(seconds: 1));
     try {
-      await _serviceClient.postRegister(registerUser);
+      final token = storage.getItem('token');
+      await _serviceClient.postRegister(registerUser, token);
       emit(const UsersSuccess());
     } on Exception {
       emit(const UsersFailure());
@@ -38,7 +43,11 @@ class UsersCubit extends Cubit<UsersState> {
     emit(const UsersLoading());
     await Future.delayed(const Duration(seconds: 1));
     try {
-      this.hasToken = await _serviceClient.postLogin(loginUser);
+      hasToken = await _serviceClient.postLogin(loginUser);
+      storage.setItem('token', hasToken.token);
+      // storage.setItem('role', hasToken.role);
+
+      print(hasToken);
       emit(const UsersSuccess());
     } on Exception {
       emit(const UsersFailure());
@@ -48,8 +57,8 @@ class UsersCubit extends Cubit<UsersState> {
   Future<void> getUsers() async {
     emit(const UsersLoading());
     try {
-      final userResponse =
-          await _serviceClient.getUsers(this.hasToken.token.toString());
+      final token = storage.getItem('token');
+      final userResponse = await _serviceClient.getUsers(token);
       final users = userResponse.users
           .map((user) => User(
                 id: user.id,
@@ -74,7 +83,8 @@ class UsersCubit extends Cubit<UsersState> {
     emit(const UsersLoading());
     await Future.delayed(const Duration(seconds: 1));
     try {
-      editUser = await _serviceClient.updateUser(editUser);
+      final token = storage.getItem('token');
+      editUser = await _serviceClient.updateUser(editUser, token);
       emit(const UsersSuccess());
     } on Exception {
       emit(const UsersFailure());
@@ -85,7 +95,8 @@ class UsersCubit extends Cubit<UsersState> {
     emit(const UsersLoading());
     await Future.delayed(const Duration(seconds: 1));
     try {
-      await _serviceClient.deleteUser(id);
+      final token = storage.getItem('token');
+      await _serviceClient.deleteUser(id, token);
       getUsers();
     } on Exception {
       emit(const UsersFailure());

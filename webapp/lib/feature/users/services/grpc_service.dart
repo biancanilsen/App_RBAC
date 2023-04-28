@@ -23,7 +23,7 @@ class ServiceClient {
 
   Init() {
     client = ClientChannel(
-      '172.16.8.73',
+      '192.168.8.43',
       port: 3000,
       options: const ChannelOptions(
         credentials: ChannelCredentials.insecure(),
@@ -40,7 +40,7 @@ class ServiceClient {
     await client.shutdown();
   }
 
-  Future<UserResponse> postRegister(UserResponse model) async {
+  Future<UserResponse> postRegister(UserResponse model, String token) async {
     try {
       if (stub == null) {
         Init();
@@ -49,14 +49,15 @@ class ServiceClient {
         }
       }
       final request;
-
+      final headers = {'Authorization': '$token'};
       request = CreateUserResquest(
         name: model.name,
         email: model.email,
         password: model.password,
       );
 
-      final response = await stub?.create(request);
+      final response =
+          await stub?.create(request, options: CallOptions(metadata: headers));
 
       return response!;
     } catch (e) {
@@ -99,12 +100,10 @@ class ServiceClient {
         }
       }
       final headers = {'Authorization': '$token'};
-      // final metadata = Metadata.fromMap(headers);
       final request = Empty();
       final response =
           await stub?.showAll(request, options: CallOptions(metadata: headers));
 
-      // final response = await stub?.showAll(request);
       return response!;
     } catch (e) {
       print('Caught error: $e');
@@ -112,53 +111,7 @@ class ServiceClient {
     }
   }
 
-  // Future getConfig() async {
-  //   final uri = Uri.parse('https://172.16.8.73:3000');
-  //   final socket = await SecureSocket.connect(uri.host, uri.port);
-  //   final transport = await http2.ClientTransportConnection.viaSocket(
-  //     socket,
-  //     settings: http2.ClientSettings(),
-  //   );
-  //   final headers = <String, Object>{
-  //     HttpHeaders.authorizationHeader: 'Bearer $accessToken',
-  //   };
-  //   final stream = transport.makeRequest(
-  //     headers as List<http2.Header>,
-  //     endStream: true,
-  //   );
-  // }
-
-  // Future<UsersResponse> getUsers() async {
-  //   try {
-  //     final uri = Uri.parse('https://example.com/path');
-  //     final socket = await SecureSocket.connect(uri.host, uri.port);
-  //     final transport = await http2.ClientTransportConnection.viaSocket(
-  //       socket,
-  //       settings: http2.ClientSettings(),
-  //     );
-  //     final headers = <String, Object>{
-  //       HttpHeaders.authorizationHeader: 'Bearer $accessToken',
-  //     };
-  //     final stream = transport.makeRequest(
-  //       headers as List<http2.Header>,
-  //       endStream: true,
-  //     );
-  //     await stream.outgoingMessages.close();
-  //     final response = await stream.incomingMessages.first;
-  //     final responseHeaders = response.headers;
-  //     final responseStream = response.expand((m) => m);
-  //     final responseBody = await utf8.decodeStream(responseStream);
-  //     print(
-  //         'Response status: ${responseHeaders.value(HttpHeaders.statusHeader)}');
-  //     print('Response body: $responseBody');
-  //     return UsersResponse.fromJson(json.decode(responseBody));
-  //   } catch (e) {
-  //     print('Caught error: $e');
-  //     throw Exception('Error getting guests: $e');
-  //   }
-  // }
-
-  Future<UserResponse> updateUser(UserResponse model) async {
+  Future<UserResponse> updateUser(UserResponse model, String token) async {
     try {
       if (stub == null) {
         Init();
@@ -167,14 +120,15 @@ class ServiceClient {
         }
       }
       final request;
-
+      final headers = {'Authorization': '$token'};
       request = UpdateUserResponse(
         id: model.id,
         name: model.name,
         email: model.email,
         password: model.password,
       );
-      final response = await stub?.update(request);
+      final response =
+          await stub?.update(request, options: CallOptions(metadata: headers));
       return response!;
     } catch (e) {
       print('Caught error: $e');
@@ -182,15 +136,17 @@ class ServiceClient {
     }
   }
 
-  Future<Empty> deleteUser(String id) async {
+  Future<Empty> deleteUser(String id, String token) async {
     try {
       if (stub == null) {
         throw Exception('Stub has not been initialized');
       }
+      final headers = {'Authorization': '$token'};
       final request = IdRequest(
         id: id,
       );
-      final response = await stub?.delete(request);
+      final response =
+          await stub?.delete(request, options: CallOptions(metadata: headers));
       return Empty();
     } catch (e) {
       print('Caught error: $e');
