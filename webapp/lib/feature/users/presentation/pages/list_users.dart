@@ -34,7 +34,7 @@ class UsersView extends StatelessWidget {
       backgroundColor: Colors.white,
       appBar: AppBar(
         title: const Text('Users'),
-        backgroundColor: const Color(0xFF706CD8),
+        backgroundColor: const Color(0xFF5367EC),
         foregroundColor: Colors.white,
         centerTitle: true,
         elevation: 0,
@@ -64,7 +64,7 @@ class UsersView extends StatelessWidget {
                   begin: Alignment(0.7, -0.5),
                   end: Alignment(0.6, 0.5),
                   colors: [
-                    Color(0xFF706CD8),
+                    Color(0xFF5367EC),
                     Color.fromARGB(255, 117, 164, 177),
                   ],
                 ),
@@ -76,7 +76,7 @@ class UsersView extends StatelessWidget {
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       bottomNavigationBar: BottomAppBar(
-        color: const Color(0xFF706CD8),
+        color: const Color(0xFF5367EC),
         shape: const CircularNotchedRectangle(),
         child: Container(
           height: 60,

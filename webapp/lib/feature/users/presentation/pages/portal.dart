@@ -16,7 +16,7 @@ class _PortalPageState extends State<PortalPage> {
       appBar: AppBar(
         title: const Text('Welcome to RBAC', style: TextStyle(fontSize: 18)),
         backgroundColor: Colors.white,
-        foregroundColor: const Color(0xFF706CD8),
+        foregroundColor: const Color(0xFF5367EC),
         centerTitle: true,
         elevation: 0,
       ),
@@ -26,7 +26,7 @@ class _PortalPageState extends State<PortalPage> {
         child: Column(
           children: [
             Image.asset(
-              'assets/images/backgroudPortal.jpg',
+              'assets/images/security.jpg',
               height: 400,
               width: 400,
             ),
@@ -45,7 +45,7 @@ class _PortalPageState extends State<PortalPage> {
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(25),
                     ),
-                    backgroundColor: const Color(0xFF706CD8),
+                    backgroundColor: const Color(0xFF5367EC),
                   ),
                   child: const Text('SIGNIN'),
                 ),
@@ -67,7 +67,7 @@ class _PortalPageState extends State<PortalPage> {
                       borderRadius: BorderRadius.circular(25),
                     ),
                     backgroundColor: Colors.grey[200],
-                    foregroundColor: const Color(0xFF706CD8),
+                    foregroundColor: const Color(0xFF5367EC),
                   ),
                   child: const Text('SIGNUP'),
                 ),

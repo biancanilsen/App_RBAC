@@ -54,7 +54,7 @@ class _RegisterPageState extends State<RegisterPage> {
       appBar: AppBar(
         title: const Text('CADASTRO', style: TextStyle(fontSize: 18)),
         backgroundColor: Colors.white,
-        foregroundColor: const Color(0xFF706CD8),
+        foregroundColor: const Color(0xFF5367EC),
         centerTitle: true,
         elevation: 0,
       ),
@@ -80,11 +80,11 @@ class _RegisterPageState extends State<RegisterPage> {
         child: SingleChildScrollView(
           physics: const BouncingScrollPhysics(),
           child: Padding(
-            padding: const EdgeInsets.only(top: 20.0),
+            padding: const EdgeInsets.only(top: 50.0),
             child: Column(
               children: [
                 Image.asset(
-                  'assets/images/register.png',
+                  'assets/images/signup.png',
                   height: 300,
                   width: 600,
                 ),
@@ -258,7 +258,7 @@ class _RegisterPageState extends State<RegisterPage> {
                                     shape: RoundedRectangleBorder(
                                       borderRadius: BorderRadius.circular(25),
                                     ),
-                                    backgroundColor: const Color(0xFF706CD8),
+                                    backgroundColor: const Color(0xFF5367EC),
                                   ),
                                   child: const Text('CADASTRAR'),
                                 ),

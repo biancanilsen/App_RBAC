@@ -55,7 +55,7 @@ class _LoginPageState extends State<LoginPage> {
       appBar: AppBar(
         title: const Text('LOGIN', style: TextStyle(fontSize: 18)),
         backgroundColor: Colors.white,
-        foregroundColor: const Color(0xFF706CD8),
+        foregroundColor: const Color(0xFF5367EC),
         centerTitle: true,
         elevation: 0,
       ),
@@ -88,7 +88,7 @@ class _LoginPageState extends State<LoginPage> {
               child: Column(
                 children: [
                   Image.asset(
-                    'assets/images/login.png',
+                    'assets/images/signin.png',
                     height: 350,
                     width: 600,
                   ),
@@ -223,7 +223,7 @@ class _LoginPageState extends State<LoginPage> {
                                     shape: RoundedRectangleBorder(
                                       borderRadius: BorderRadius.circular(25),
                                     ),
-                                    backgroundColor: const Color(0xFF706CD8),
+                                    backgroundColor: const Color(0xFF5367EC),
                                   ),
                                   child: const Text('LOGIN'),
                                 );
@@ -238,7 +238,7 @@ class _LoginPageState extends State<LoginPage> {
                             );
                           },
                           style: TextButton.styleFrom(
-                              foregroundColor: const Color(0xFF706CD8)),
+                              foregroundColor: const Color(0xFF5367EC)),
                           child: const Text(
                             'Você não tem conta? Cadastrar',
                             textAlign: TextAlign.center,

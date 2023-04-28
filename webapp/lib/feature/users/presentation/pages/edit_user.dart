@@ -76,7 +76,7 @@ class _UsersEditViewState extends State<UsersEditView> {
       resizeToAvoidBottomInset: false,
       appBar: AppBar(
         title: const Text('Editar usuário'),
-        backgroundColor: Color(0xFF706CD8),
+        backgroundColor: Color(0xFF5367EC),
         foregroundColor: Colors.white,
         centerTitle: true,
         elevation: 0,
@@ -239,7 +239,7 @@ class _UsersEditViewState extends State<UsersEditView> {
                                       shape: RoundedRectangleBorder(
                                         borderRadius: BorderRadius.circular(25),
                                       ),
-                                      backgroundColor: const Color(0xFF706CD8),
+                                      backgroundColor: const Color(0xFF5367EC),
                                     ),
                                     child: const Text('SALVAR'),
                                   ),
