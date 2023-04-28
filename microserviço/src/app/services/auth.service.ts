@@ -31,11 +31,14 @@ export class AuthService {
 
     async login(email: string, password: string) {
         let validate = await this.validateUser(email, password);
-        console.log(validate.id);
         const payload = { sud: validate.id, login: validate.email };
         let token = this.jwtService.sign(payload)
+        let user = await this.userService.findOneOrFail(validate.id);
+        console.log(user.role);
+
         let data = {
-            token: token
+            token: token,
+            role: user.role,
         }
         return data
     }

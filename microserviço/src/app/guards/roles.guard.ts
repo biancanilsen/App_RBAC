@@ -48,6 +48,7 @@ export class RolesGuard implements CanActivate {
         }
       }
 
+      console.log(user)
 
       console.log(pass)
       return pass
