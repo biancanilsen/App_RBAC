@@ -43,6 +43,7 @@ class CreateUserResquest extends $pb.GeneratedMessage {
     ..aOS(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'name')
     ..aOS(2, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'email')
     ..aOS(3, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'password')
+    ..aOS(4, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'role')
     ..hasRequiredFields = false
   ;
 
@@ -51,6 +52,7 @@ class CreateUserResquest extends $pb.GeneratedMessage {
     $core.String? name,
     $core.String? email,
     $core.String? password,
+    $core.String? role,
   }) {
     final _result = create();
     if (name != null) {
@@ -61,6 +63,9 @@ class CreateUserResquest extends $pb.GeneratedMessage {
     }
     if (password != null) {
       _result.password = password;
+    }
+    if (role != null) {
+      _result.role = role;
     }
     return _result;
   }
@@ -111,6 +116,15 @@ class CreateUserResquest extends $pb.GeneratedMessage {
   $core.bool hasPassword() => $_has(2);
   @$pb.TagNumber(3)
   void clearPassword() => clearField(3);
+
+  @$pb.TagNumber(4)
+  $core.String get role => $_getSZ(3);
+  @$pb.TagNumber(4)
+  set role($core.String v) { $_setString(3, v); }
+  @$pb.TagNumber(4)
+  $core.bool hasRole() => $_has(3);
+  @$pb.TagNumber(4)
+  void clearRole() => clearField(4);
 }
 
 class UserResponse extends $pb.GeneratedMessage {
@@ -119,6 +133,7 @@ class UserResponse extends $pb.GeneratedMessage {
     ..aOS(2, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'name')
     ..aOS(3, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'email')
     ..aOS(4, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'password')
+    ..aOS(5, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'role')
     ..hasRequiredFields = false
   ;
 
@@ -128,6 +143,7 @@ class UserResponse extends $pb.GeneratedMessage {
     $core.String? name,
     $core.String? email,
     $core.String? password,
+    $core.String? role,
   }) {
     final _result = create();
     if (id != null) {
@@ -141,6 +157,9 @@ class UserResponse extends $pb.GeneratedMessage {
     }
     if (password != null) {
       _result.password = password;
+    }
+    if (role != null) {
+      _result.role = role;
     }
     return _result;
   }
@@ -200,6 +219,15 @@ class UserResponse extends $pb.GeneratedMessage {
   $core.bool hasPassword() => $_has(3);
   @$pb.TagNumber(4)
   void clearPassword() => clearField(4);
+
+  @$pb.TagNumber(5)
+  $core.String get role => $_getSZ(4);
+  @$pb.TagNumber(5)
+  set role($core.String v) { $_setString(4, v); }
+  @$pb.TagNumber(5)
+  $core.bool hasRole() => $_has(4);
+  @$pb.TagNumber(5)
+  void clearRole() => clearField(5);
 }
 
 class UpdateUserResponse extends $pb.GeneratedMessage {

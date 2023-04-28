@@ -49,7 +49,9 @@ export class UserService {
 
     async findOne(email: string) {
         try {
-            return await this.userRepository.findOneBy({ email });
+            return this.userRepository.findOne({
+                where: { email },
+            });
         } catch (error) {
             throw new NotFoundException(error.message);
         }

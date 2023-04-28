@@ -17,6 +17,7 @@ class UsersCubit extends Cubit<UsersState> {
       : _serviceClient = serviceClient,
         super(const UsersInitial());
 
+  late AuthResponse hasToken;
   final ServiceClient _serviceClient;
 
   Future<void> postRegister(String name, String email, String password) async {
@@ -37,7 +38,7 @@ class UsersCubit extends Cubit<UsersState> {
     emit(const UsersLoading());
     await Future.delayed(const Duration(seconds: 1));
     try {
-      await _serviceClient.postLogin(loginUser);
+      this.hasToken = await _serviceClient.postLogin(loginUser);
       emit(const UsersSuccess());
     } on Exception {
       emit(const UsersFailure());
@@ -47,7 +48,8 @@ class UsersCubit extends Cubit<UsersState> {
   Future<void> getUsers() async {
     emit(const UsersLoading());
     try {
-      final userResponse = await _serviceClient.getUsers();
+      final userResponse =
+          await _serviceClient.getUsers(this.hasToken.token.toString());
       final users = userResponse.users
           .map((user) => User(
                 id: user.id,

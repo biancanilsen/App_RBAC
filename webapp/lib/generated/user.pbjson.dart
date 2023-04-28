@@ -22,11 +22,12 @@ const CreateUserResquest$json = const {
     const {'1': 'name', '3': 1, '4': 1, '5': 9, '10': 'name'},
     const {'1': 'email', '3': 2, '4': 1, '5': 9, '10': 'email'},
     const {'1': 'password', '3': 3, '4': 1, '5': 9, '10': 'password'},
+    const {'1': 'role', '3': 4, '4': 1, '5': 9, '10': 'role'},
   ],
 };
 
 /// Descriptor for `CreateUserResquest`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List createUserResquestDescriptor = $convert.base64Decode('ChJDcmVhdGVVc2VyUmVzcXVlc3QSEgoEbmFtZRgBIAEoCVIEbmFtZRIUCgVlbWFpbBgCIAEoCVIFZW1haWwSGgoIcGFzc3dvcmQYAyABKAlSCHBhc3N3b3Jk');
+final $typed_data.Uint8List createUserResquestDescriptor = $convert.base64Decode('ChJDcmVhdGVVc2VyUmVzcXVlc3QSEgoEbmFtZRgBIAEoCVIEbmFtZRIUCgVlbWFpbBgCIAEoCVIFZW1haWwSGgoIcGFzc3dvcmQYAyABKAlSCHBhc3N3b3JkEhIKBHJvbGUYBCABKAlSBHJvbGU=');
 @$core.Deprecated('Use userResponseDescriptor instead')
 const UserResponse$json = const {
   '1': 'UserResponse',
@@ -35,11 +36,12 @@ const UserResponse$json = const {
     const {'1': 'name', '3': 2, '4': 1, '5': 9, '10': 'name'},
     const {'1': 'email', '3': 3, '4': 1, '5': 9, '10': 'email'},
     const {'1': 'password', '3': 4, '4': 1, '5': 9, '10': 'password'},
+    const {'1': 'role', '3': 5, '4': 1, '5': 9, '10': 'role'},
   ],
 };
 
 /// Descriptor for `UserResponse`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List userResponseDescriptor = $convert.base64Decode('CgxVc2VyUmVzcG9uc2USDgoCaWQYASABKAlSAmlkEhIKBG5hbWUYAiABKAlSBG5hbWUSFAoFZW1haWwYAyABKAlSBWVtYWlsEhoKCHBhc3N3b3JkGAQgASgJUghwYXNzd29yZA==');
+final $typed_data.Uint8List userResponseDescriptor = $convert.base64Decode('CgxVc2VyUmVzcG9uc2USDgoCaWQYASABKAlSAmlkEhIKBG5hbWUYAiABKAlSBG5hbWUSFAoFZW1haWwYAyABKAlSBWVtYWlsEhoKCHBhc3N3b3JkGAQgASgJUghwYXNzd29yZBISCgRyb2xlGAUgASgJUgRyb2xl');
 @$core.Deprecated('Use updateUserResponseDescriptor instead')
 const UpdateUserResponse$json = const {
   '1': 'UpdateUserResponse',
