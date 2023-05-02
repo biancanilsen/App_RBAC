@@ -146,6 +146,9 @@ class _LoginPageState extends State<LoginPage> {
                             return SizedBox(
                               width: 340,
                               child: TextFormField(
+                                keyboardType: TextInputType.visiblePassword,
+                                obscureText: _obscured,
+                                focusNode: textFieldFocusNode,
                                 decoration: InputDecoration(
                                   floatingLabelBehavior:
                                       FloatingLabelBehavior.never,

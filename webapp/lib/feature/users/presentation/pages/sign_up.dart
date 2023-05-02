@@ -38,7 +38,7 @@ class _RegisterPageState extends State<RegisterPage> {
   final TextEditingController _passwordController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
   final textFieldFocusNode = FocusNode();
-  bool _obscured = true;
+  bool _obscured = false;
 
   void _toggleObscured() {
     setState(() {
@@ -186,6 +186,7 @@ class _RegisterPageState extends State<RegisterPage> {
                           return SizedBox(
                             width: 340,
                             child: TextFormField(
+                              obscureText: _obscured,
                               decoration: InputDecoration(
                                 floatingLabelBehavior:
                                     FloatingLabelBehavior.never,

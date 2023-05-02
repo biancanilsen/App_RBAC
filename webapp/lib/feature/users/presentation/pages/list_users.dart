@@ -28,7 +28,6 @@ class ListUsersPage extends StatelessWidget {
 class UsersView extends StatelessWidget {
   UsersView({Key? key}) : super(key: key);
   final LocalStorage storage = new LocalStorage('token');
-  final bool isShow = false;
 
   @override
   Widget build(BuildContext context) {
