@@ -73,16 +73,21 @@ class AuthRequest extends $pb.GeneratedMessage {
 class AuthResponse extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'AuthResponse', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'auth'), createEmptyInstance: create)
     ..aOS(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'token')
+    ..aOS(2, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'role')
     ..hasRequiredFields = false
   ;
 
   AuthResponse._() : super();
   factory AuthResponse({
     $core.String? token,
+    $core.String? role,
   }) {
     final _result = create();
     if (token != null) {
       _result.token = token;
+    }
+    if (role != null) {
+      _result.role = role;
     }
     return _result;
   }
@@ -115,6 +120,15 @@ class AuthResponse extends $pb.GeneratedMessage {
   $core.bool hasToken() => $_has(0);
   @$pb.TagNumber(1)
   void clearToken() => clearField(1);
+
+  @$pb.TagNumber(2)
+  $core.String get role => $_getSZ(1);
+  @$pb.TagNumber(2)
+  set role($core.String v) { $_setString(1, v); }
+  @$pb.TagNumber(2)
+  $core.bool hasRole() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearRole() => clearField(2);
 }
 
 class TokenRequest extends $pb.GeneratedMessage {

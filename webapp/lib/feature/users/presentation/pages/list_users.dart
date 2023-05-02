@@ -1,3 +1,4 @@
+import 'package:localstorage/localstorage.dart';
 import 'package:webapp/feature/users/presentation/pages/sign_up.dart';
 
 import '../../domain/cubits/users_cubit.dart';
@@ -19,13 +20,14 @@ class ListUsersPage extends StatelessWidget {
     return BlocProvider(
       create: (context) =>
           UsersCubit(serviceClient: ServiceClient())..getUsers(),
-      child: const UsersView(),
+      child: UsersView(),
     );
   }
 }
 
 class UsersView extends StatelessWidget {
-  const UsersView({Key? key}) : super(key: key);
+  UsersView({Key? key}) : super(key: key);
+  final LocalStorage storage = new LocalStorage('token');
 
   @override
   Widget build(BuildContext context) {
@@ -40,36 +42,40 @@ class UsersView extends StatelessWidget {
         elevation: 0,
       ),
       body: const _Content(),
-      floatingActionButton: Padding(
-        padding: const EdgeInsets.only(top: 20),
-        child: SizedBox(
-          height: 70,
-          width: 70,
-          child: FloatingActionButton(
-            backgroundColor: Colors.transparent,
-            elevation: 0,
-            onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => const SignUpPage()),
-              );
-            },
-            child: Container(
-              height: 70,
-              width: 70,
-              decoration: BoxDecoration(
-                border: Border.all(color: Colors.white, width: 4),
-                shape: BoxShape.circle,
-                gradient: const LinearGradient(
-                  begin: Alignment(0.7, -0.5),
-                  end: Alignment(0.6, 0.5),
-                  colors: [
-                    Color(0xFF5367EC),
-                    Color.fromARGB(255, 117, 164, 177),
-                  ],
+      floatingActionButton: Visibility(
+        visible: storage.getItem("role") == 'admin' ||
+            storage.getItem("role") == 'creator',
+        child: Padding(
+          padding: const EdgeInsets.only(top: 20),
+          child: SizedBox(
+            height: 70,
+            width: 70,
+            child: FloatingActionButton(
+              backgroundColor: Colors.transparent,
+              elevation: 0,
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => const SignUpPage()),
+                );
+              },
+              child: Container(
+                height: 70,
+                width: 70,
+                decoration: BoxDecoration(
+                  border: Border.all(color: Colors.white, width: 4),
+                  shape: BoxShape.circle,
+                  gradient: const LinearGradient(
+                    begin: Alignment(0.7, -0.5),
+                    end: Alignment(0.6, 0.5),
+                    colors: [
+                      Color(0xFF5367EC),
+                      Color.fromARGB(255, 117, 164, 177),
+                    ],
+                  ),
                 ),
+                child: const Icon(Icons.add, size: 30),
               ),
-              child: const Icon(Icons.add, size: 30),
             ),
           ),
         ),
@@ -122,8 +128,10 @@ class _Content extends StatelessWidget {
 }
 
 class _UsersList extends StatelessWidget {
-  const _UsersList(this.users, {Key? key}) : super(key: key);
+  final LocalStorage storage = new LocalStorage('token');
+  _UsersList(this.users, {Key? key}) : super(key: key);
   final List<User>? users;
+
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -144,18 +152,25 @@ class _UsersList extends StatelessWidget {
                 subtitle: Text(
                   user.email,
                 ),
-                trailing: Wrap(children: <Widget>[
-                  IconButton(
-                    icon: const Icon(Icons.edit),
-                    onPressed: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => EditUserpage(user: user)),
-                      );
-                    },
-                  ),
-                  IconButton(
+                trailing: Wrap(
+                    children: <Widget>[
+                  Visibility(
+                      visible: storage.getItem("role") == 'admin' ||
+                          storage.getItem("role") == 'editor',
+                      child: IconButton(
+                        icon: const Icon(Icons.edit),
+                        onPressed: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => EditUserpage(user: user),
+                            ),
+                          );
+                        },
+                      )),
+                  Visibility(
+                    visible: storage.getItem("role") == 'admin',
+                    child: IconButton(
                       icon: const Icon(Icons.delete),
                       onPressed: () {
                         context.read<UsersCubit>().deleteUser(user.id);
@@ -167,8 +182,10 @@ class _UsersList extends StatelessWidget {
                           ..showSnackBar(const SnackBar(
                             content: Text('Convidado excluído com sucesso'),
                           ));
-                      }),
-                ]),
+                      },
+                    ),
+                  ),
+                ].toList()),
               ),
             ),
           ],
