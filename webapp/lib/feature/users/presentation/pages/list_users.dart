@@ -114,7 +114,7 @@ class _Content extends StatelessWidget {
       if (state.users?.isEmpty ?? true) {
         return const Center(
           child:
-              Text('Não há convidados. Clique no botão abaixo para cadastrar.'),
+              Text('Não há usuários. Clique no botão abaixo para cadastrar.'),
         );
       } else {
         return _UsersList(state.users);
@@ -127,10 +127,16 @@ class _Content extends StatelessWidget {
   }
 }
 
-class _UsersList extends StatelessWidget {
-  final LocalStorage storage = new LocalStorage('token');
+class _UsersList extends StatefulWidget {
   _UsersList(this.users, {Key? key}) : super(key: key);
   final List<User>? users;
+
+  @override
+  State<_UsersList> createState() => _UsersListState();
+}
+
+class _UsersListState extends State<_UsersList> {
+  final LocalStorage storage = new LocalStorage('token');
 
   @override
   Widget build(BuildContext context) {
@@ -138,57 +144,54 @@ class _UsersList extends StatelessWidget {
       padding: const EdgeInsets.only(bottom: 5.0),
       child: ListView(
         children: [
-          for (final user in users!) ...[
-            Padding(
-              padding:
-                  const EdgeInsets.only(top: 15.5, left: 10.5, right: 10.5),
-              child: ListTile(
-                tileColor: Colors.white,
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(10.0),
-                  side: const BorderSide(color: Colors.grey, width: 1),
-                ),
-                title: Text(user.name),
-                subtitle: Text(
-                  user.email,
-                ),
-                trailing: Wrap(
-                    children: <Widget>[
-                  Visibility(
-                      visible: storage.getItem("role") == 'admin' ||
-                          storage.getItem("role") == 'editor',
-                      child: IconButton(
-                        icon: const Icon(Icons.edit),
-                        onPressed: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => EditUserpage(user: user),
-                            ),
-                          );
-                        },
-                      )),
-                  Visibility(
-                    visible: storage.getItem("role") == 'admin',
-                    child: IconButton(
-                      icon: const Icon(Icons.delete),
-                      onPressed: () {
-                        context.read<UsersCubit>().deleteUser(user.id);
-                        (UsersLoaded(
-                          users: users,
-                        ));
-                        ScaffoldMessenger.of(context)
-                          ..hideCurrentSnackBar()
-                          ..showSnackBar(const SnackBar(
-                            content: Text('Convidado excluído com sucesso'),
-                          ));
-                      },
-                    ),
+          if (widget.users != null)
+            for (final user in widget.users!)
+              Padding(
+                padding:
+                    const EdgeInsets.only(top: 15.5, left: 10.5, right: 10.5),
+                child: ListTile(
+                  tileColor: Colors.white,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10.0),
+                    side: const BorderSide(color: Colors.grey, width: 1),
                   ),
-                ].toList()),
+                  title: Text(user.name),
+                  subtitle: Text(
+                    user.email,
+                  ),
+                  trailing: Wrap(
+                    children: <Widget>[
+                      Visibility(
+                        visible: storage.getItem("role") == 'admin' ||
+                            storage.getItem("role") == 'editor',
+                        child: IconButton(
+                          icon: const Icon(Icons.edit),
+                          onPressed: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) =>
+                                      EditUserpage(user: user)),
+                            );
+                          },
+                        ),
+                      ),
+                      Visibility(
+                        visible: storage.getItem("role") == 'admin',
+                        child: IconButton(
+                          icon: const Icon(Icons.delete),
+                          onPressed: () {
+                            context.read<UsersCubit>().deleteUser(user.id);
+                            (UsersLoaded(
+                              users: widget.users!,
+                            ));
+                          },
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
               ),
-            ),
-          ],
         ],
       ),
     );
