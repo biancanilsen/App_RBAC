@@ -12,7 +12,7 @@ export type PolicyHandler = IPolicyHandler | PolicyHandlerCallback;
 
 export class CreateUserPolicyHandler implements IPolicyHandler {
     handle(ability: AppAbility) {
-        return ability.can(Action.Create, 'all') && ability.can(Action.Read, 'all');
+        return ability.can(Action.Create, 'all');
     }
 }
 
@@ -25,7 +25,7 @@ export class ReadUserPolicyHandler implements IPolicyHandler {
 
 export class UpdateUserPolicyHandler implements IPolicyHandler {
     handle(ability: AppAbility) {
-        return ability.can(Action.Update, 'all') && ability.can(Action.Read, 'all');
+        return ability.can(Action.Update, 'all');
     }
 }
 

@@ -25,7 +25,7 @@ export class UserGrpcController {
 
     @GrpcMethod('UserService', 'Update')
     @UseGuards(PoliciesGuard)
-    @CheckPolicies(new UpdateUserPolicyHandler())
+    @CheckPolicies(new UpdateUserPolicyHandler(), new ReadUserPolicyHandler())
     async Update(data: UpdateUserDto, metadata: Metadata, call: ServerUnaryCall<UpdateUserDto, any>) {
         return await this.userService.update(call.request.id, call.request)
 
@@ -47,6 +47,7 @@ export class UserGrpcController {
     }
 
     @GrpcMethod('UserService', 'Delete')
+    @CheckPolicies(new AllUserPolicyHandler())
     @UseGuards(PoliciesGuard)
     async Delete(data: { id: string }) {
         const { id } = data;

@@ -20,7 +20,7 @@ export class UserEntity {
     @Column({
         type: 'enum',
         enum: Role,
-        default: Role.ADMIN
+        default: Role.CREATOR
     })
     role: Role;
 

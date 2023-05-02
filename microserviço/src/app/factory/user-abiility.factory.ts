@@ -19,12 +19,14 @@ export class UserAbilityFactory {
                 can(Action.Manage, 'all');
                 break;
             case 'editor':
+                can(Action.Read, 'all');
                 can(Action.Update, 'all');
                 break;
             case 'user':
                 can(Action.Read, 'all');
                 break;
             case 'creator':
+                can(Action.Read, 'all');
                 can(Action.Create, 'all');
                 break;
             default:
@@ -36,6 +38,9 @@ export class UserAbilityFactory {
         //   can(Action.Read, 'all'); // read-only access to everything
         // }
 
+        if (user.role != 'admin') {
+            cannot(Action.Delete, 'all');
+        }
         // can(Action.Update, Article, { authorId: user.id });
         // cannot(Action.Delete, Article, { isPublished: true });
 
