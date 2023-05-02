@@ -27,10 +27,8 @@ export class UserGrpcController {
     @UseGuards(PoliciesGuard)
     @CheckPolicies(new UpdateUserPolicyHandler())
     async Update(data: UpdateUserDto, metadata: Metadata, call: ServerUnaryCall<UpdateUserDto, any>) {
-        try {
-            return await this.userService.update(data.id, data)
-        } catch (error) {
-        }
+        return await this.userService.update(call.request.id, call.request)
+
     }
 
     @GrpcMethod('UserService', 'ShowAll')

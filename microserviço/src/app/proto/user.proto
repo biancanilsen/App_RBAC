@@ -3,7 +3,7 @@ package user;
 
 service UserService {
     rpc Create(CreateUserResquest) returns(UserResponse){};
-    rpc Update(UpdateUserResponse) returns(UserResponse){};
+    rpc Update(UpdateUserRequest) returns(UserResponse){};
     rpc ShowAll(Empty) returns(UsersResponse){};
     rpc ShowOne(IdRequest) returns(UserResponse){};
     rpc Delete(IdRequest) returns(Empty){};
@@ -28,11 +28,12 @@ message UserResponse{
 
 }
 
-message UpdateUserResponse{
+message UpdateUserRequest{
     string id =1;
     optional string name = 2;
     optional string email = 3;
     optional string password = 4;
+    optional string role = 5;
 }
 
 message UsersResponse{
