@@ -20,9 +20,9 @@ class UserServiceClient extends $grpc.Client {
           ($2.CreateUserResquest value) => value.writeToBuffer(),
           ($core.List<$core.int> value) => $2.UserResponse.fromBuffer(value));
   static final _$update =
-      $grpc.ClientMethod<$2.UpdateUserResponse, $2.UserResponse>(
+      $grpc.ClientMethod<$2.UpdateUserRequest, $2.UserResponse>(
           '/user.UserService/Update',
-          ($2.UpdateUserResponse value) => value.writeToBuffer(),
+          ($2.UpdateUserRequest value) => value.writeToBuffer(),
           ($core.List<$core.int> value) => $2.UserResponse.fromBuffer(value));
   static final _$showAll = $grpc.ClientMethod<$2.Empty, $2.UsersResponse>(
       '/user.UserService/ShowAll',
@@ -47,7 +47,7 @@ class UserServiceClient extends $grpc.Client {
     return $createUnaryCall(_$create, request, options: options);
   }
 
-  $grpc.ResponseFuture<$2.UserResponse> update($2.UpdateUserResponse request,
+  $grpc.ResponseFuture<$2.UserResponse> update($2.UpdateUserRequest request,
       {$grpc.CallOptions? options}) {
     return $createUnaryCall(_$update, request, options: options);
   }
@@ -80,13 +80,12 @@ abstract class UserServiceBase extends $grpc.Service {
         ($core.List<$core.int> value) =>
             $2.CreateUserResquest.fromBuffer(value),
         ($2.UserResponse value) => value.writeToBuffer()));
-    $addMethod($grpc.ServiceMethod<$2.UpdateUserResponse, $2.UserResponse>(
+    $addMethod($grpc.ServiceMethod<$2.UpdateUserRequest, $2.UserResponse>(
         'Update',
         update_Pre,
         false,
         false,
-        ($core.List<$core.int> value) =>
-            $2.UpdateUserResponse.fromBuffer(value),
+        ($core.List<$core.int> value) => $2.UpdateUserRequest.fromBuffer(value),
         ($2.UserResponse value) => value.writeToBuffer()));
     $addMethod($grpc.ServiceMethod<$2.Empty, $2.UsersResponse>(
         'ShowAll',
@@ -117,7 +116,7 @@ abstract class UserServiceBase extends $grpc.Service {
   }
 
   $async.Future<$2.UserResponse> update_Pre($grpc.ServiceCall call,
-      $async.Future<$2.UpdateUserResponse> request) async {
+      $async.Future<$2.UpdateUserRequest> request) async {
     return update(call, await request);
   }
 
@@ -139,7 +138,7 @@ abstract class UserServiceBase extends $grpc.Service {
   $async.Future<$2.UserResponse> create(
       $grpc.ServiceCall call, $2.CreateUserResquest request);
   $async.Future<$2.UserResponse> update(
-      $grpc.ServiceCall call, $2.UpdateUserResponse request);
+      $grpc.ServiceCall call, $2.UpdateUserRequest request);
   $async.Future<$2.UsersResponse> showAll(
       $grpc.ServiceCall call, $2.Empty request);
   $async.Future<$2.UserResponse> showOne(

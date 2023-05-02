@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
+import 'package:localstorage/localstorage.dart';
 import '../../domain/cubits/users_cubit.dart';
 import '../../domain/cubits/user_validation_cubit.dart';
 import '../../data/models/user_model.dart';
@@ -40,6 +41,7 @@ class _LoginPageState extends State<LoginPage> {
   final textFieldFocusNode = FocusNode();
   bool _obscured = true;
   final _formKey = GlobalKey<FormState>();
+  final LocalStorage storage = new LocalStorage('token');
 
   void _toggleObscured() {
     setState(() {

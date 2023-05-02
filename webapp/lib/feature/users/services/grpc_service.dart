@@ -121,7 +121,7 @@ class ServiceClient {
       }
       final request;
       final headers = {'Authorization': '$token'};
-      request = UpdateUserResponse(
+      request = UpdateUserRequest(
         id: model.id,
         name: model.name,
         email: model.email,

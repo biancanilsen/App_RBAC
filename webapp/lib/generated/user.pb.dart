@@ -230,21 +230,23 @@ class UserResponse extends $pb.GeneratedMessage {
   void clearRole() => clearField(5);
 }
 
-class UpdateUserResponse extends $pb.GeneratedMessage {
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'UpdateUserResponse', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'user'), createEmptyInstance: create)
+class UpdateUserRequest extends $pb.GeneratedMessage {
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'UpdateUserRequest', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'user'), createEmptyInstance: create)
     ..aOS(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'id')
     ..aOS(2, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'name')
     ..aOS(3, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'email')
     ..aOS(4, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'password')
+    ..aOS(5, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'role')
     ..hasRequiredFields = false
   ;
 
-  UpdateUserResponse._() : super();
-  factory UpdateUserResponse({
+  UpdateUserRequest._() : super();
+  factory UpdateUserRequest({
     $core.String? id,
     $core.String? name,
     $core.String? email,
     $core.String? password,
+    $core.String? role,
   }) {
     final _result = create();
     if (id != null) {
@@ -259,28 +261,31 @@ class UpdateUserResponse extends $pb.GeneratedMessage {
     if (password != null) {
       _result.password = password;
     }
+    if (role != null) {
+      _result.role = role;
+    }
     return _result;
   }
-  factory UpdateUserResponse.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
-  factory UpdateUserResponse.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+  factory UpdateUserRequest.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory UpdateUserRequest.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
   @$core.Deprecated(
   'Using this can add significant overhead to your binary. '
   'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
   'Will be removed in next major version')
-  UpdateUserResponse clone() => UpdateUserResponse()..mergeFromMessage(this);
+  UpdateUserRequest clone() => UpdateUserRequest()..mergeFromMessage(this);
   @$core.Deprecated(
   'Using this can add significant overhead to your binary. '
   'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
   'Will be removed in next major version')
-  UpdateUserResponse copyWith(void Function(UpdateUserResponse) updates) => super.copyWith((message) => updates(message as UpdateUserResponse)) as UpdateUserResponse; // ignore: deprecated_member_use
+  UpdateUserRequest copyWith(void Function(UpdateUserRequest) updates) => super.copyWith((message) => updates(message as UpdateUserRequest)) as UpdateUserRequest; // ignore: deprecated_member_use
   $pb.BuilderInfo get info_ => _i;
   @$core.pragma('dart2js:noInline')
-  static UpdateUserResponse create() => UpdateUserResponse._();
-  UpdateUserResponse createEmptyInstance() => create();
-  static $pb.PbList<UpdateUserResponse> createRepeated() => $pb.PbList<UpdateUserResponse>();
+  static UpdateUserRequest create() => UpdateUserRequest._();
+  UpdateUserRequest createEmptyInstance() => create();
+  static $pb.PbList<UpdateUserRequest> createRepeated() => $pb.PbList<UpdateUserRequest>();
   @$core.pragma('dart2js:noInline')
-  static UpdateUserResponse getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<UpdateUserResponse>(create);
-  static UpdateUserResponse? _defaultInstance;
+  static UpdateUserRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<UpdateUserRequest>(create);
+  static UpdateUserRequest? _defaultInstance;
 
   @$pb.TagNumber(1)
   $core.String get id => $_getSZ(0);
@@ -317,6 +322,15 @@ class UpdateUserResponse extends $pb.GeneratedMessage {
   $core.bool hasPassword() => $_has(3);
   @$pb.TagNumber(4)
   void clearPassword() => clearField(4);
+
+  @$pb.TagNumber(5)
+  $core.String get role => $_getSZ(4);
+  @$pb.TagNumber(5)
+  set role($core.String v) { $_setString(4, v); }
+  @$pb.TagNumber(5)
+  $core.bool hasRole() => $_has(4);
+  @$pb.TagNumber(5)
+  void clearRole() => clearField(5);
 }
 
 class UsersResponse extends $pb.GeneratedMessage {

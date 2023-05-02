@@ -42,24 +42,26 @@ const UserResponse$json = const {
 
 /// Descriptor for `UserResponse`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List userResponseDescriptor = $convert.base64Decode('CgxVc2VyUmVzcG9uc2USDgoCaWQYASABKAlSAmlkEhIKBG5hbWUYAiABKAlSBG5hbWUSFAoFZW1haWwYAyABKAlSBWVtYWlsEhoKCHBhc3N3b3JkGAQgASgJUghwYXNzd29yZBISCgRyb2xlGAUgASgJUgRyb2xl');
-@$core.Deprecated('Use updateUserResponseDescriptor instead')
-const UpdateUserResponse$json = const {
-  '1': 'UpdateUserResponse',
+@$core.Deprecated('Use updateUserRequestDescriptor instead')
+const UpdateUserRequest$json = const {
+  '1': 'UpdateUserRequest',
   '2': const [
     const {'1': 'id', '3': 1, '4': 1, '5': 9, '10': 'id'},
     const {'1': 'name', '3': 2, '4': 1, '5': 9, '9': 0, '10': 'name', '17': true},
     const {'1': 'email', '3': 3, '4': 1, '5': 9, '9': 1, '10': 'email', '17': true},
     const {'1': 'password', '3': 4, '4': 1, '5': 9, '9': 2, '10': 'password', '17': true},
+    const {'1': 'role', '3': 5, '4': 1, '5': 9, '9': 3, '10': 'role', '17': true},
   ],
   '8': const [
     const {'1': '_name'},
     const {'1': '_email'},
     const {'1': '_password'},
+    const {'1': '_role'},
   ],
 };
 
-/// Descriptor for `UpdateUserResponse`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List updateUserResponseDescriptor = $convert.base64Decode('ChJVcGRhdGVVc2VyUmVzcG9uc2USDgoCaWQYASABKAlSAmlkEhcKBG5hbWUYAiABKAlIAFIEbmFtZYgBARIZCgVlbWFpbBgDIAEoCUgBUgVlbWFpbIgBARIfCghwYXNzd29yZBgEIAEoCUgCUghwYXNzd29yZIgBAUIHCgVfbmFtZUIICgZfZW1haWxCCwoJX3Bhc3N3b3Jk');
+/// Descriptor for `UpdateUserRequest`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List updateUserRequestDescriptor = $convert.base64Decode('ChFVcGRhdGVVc2VyUmVxdWVzdBIOCgJpZBgBIAEoCVICaWQSFwoEbmFtZRgCIAEoCUgAUgRuYW1liAEBEhkKBWVtYWlsGAMgASgJSAFSBWVtYWlsiAEBEh8KCHBhc3N3b3JkGAQgASgJSAJSCHBhc3N3b3JkiAEBEhcKBHJvbGUYBSABKAlIA1IEcm9sZYgBAUIHCgVfbmFtZUIICgZfZW1haWxCCwoJX3Bhc3N3b3JkQgcKBV9yb2xl');
 @$core.Deprecated('Use usersResponseDescriptor instead')
 const UsersResponse$json = const {
   '1': 'UsersResponse',
