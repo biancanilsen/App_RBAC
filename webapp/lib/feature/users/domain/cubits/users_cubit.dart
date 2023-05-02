@@ -45,9 +45,10 @@ class UsersCubit extends Cubit<UsersState> {
     try {
       hasToken = await _serviceClient.postLogin(loginUser);
       storage.setItem('token', hasToken.token);
-      // storage.setItem('role', hasToken.role);
+      storage.setItem('role', hasToken.role);
 
       print(hasToken);
+      print(hasToken.role);
       emit(const UsersSuccess());
     } on Exception {
       emit(const UsersFailure());
@@ -58,6 +59,8 @@ class UsersCubit extends Cubit<UsersState> {
     emit(const UsersLoading());
     try {
       final token = storage.getItem('token');
+      final role = storage.getItem('role');
+      print(role);
       final userResponse = await _serviceClient.getUsers(token);
       final users = userResponse.users
           .map((user) => User(

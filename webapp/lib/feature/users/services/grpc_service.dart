@@ -23,7 +23,7 @@ class ServiceClient {
 
   Init() {
     client = ClientChannel(
-      '192.168.8.43',
+      '172.16.8.73',
       port: 3000,
       options: const ChannelOptions(
         credentials: ChannelCredentials.insecure(),
