@@ -9,21 +9,24 @@ String userToJson(List<User> data) =>
 class User {
   User({
     this.id,
-    required this.name,
-    required this.email,
-    required this.password,
+    this.name,
+    this.email,
+    this.password,
+    this.role,
   });
 
   String? id;
-  String name;
-  String email;
-  String password;
+  String? name;
+  String? email;
+  String? password;
+  String? role;
 
   factory User.fromJson(Map<String, dynamic> json) => User(
         id: json["id"],
         name: json["name"],
         email: json["email"],
         password: json["password"],
+        role: json["role"],
       );
 
   Map<String, dynamic> toJson() => {
@@ -31,6 +34,7 @@ class User {
         "name": name,
         "email": email,
         "password": password,
+        "role": role,
       };
 
   User copy({
@@ -38,11 +42,13 @@ class User {
     String? name,
     String? email,
     String? password,
+    String? role,
   }) =>
       User(
         id: id ?? this.id,
         name: name ?? this.name,
         email: email ?? this.email,
         password: password ?? this.password,
+        role: role ?? this.role,
       );
 }

@@ -155,9 +155,9 @@ class _UsersListState extends State<_UsersList> {
                     borderRadius: BorderRadius.circular(10.0),
                     side: const BorderSide(color: Colors.grey, width: 1),
                   ),
-                  title: Text(user.name),
+                  title: Text(user.name!),
                   subtitle: Text(
-                    user.email,
+                    user.email!,
                   ),
                   trailing: Wrap(
                     children: <Widget>[

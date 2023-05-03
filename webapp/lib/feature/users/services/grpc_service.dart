@@ -125,7 +125,7 @@ class ServiceClient {
         id: model.id,
         name: model.name,
         email: model.email,
-        password: model.password,
+        role: model.role,
       );
       final response =
           await stub?.update(request, options: CallOptions(metadata: headers));

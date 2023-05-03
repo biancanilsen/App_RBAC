@@ -59,6 +59,7 @@ class UsersCubit extends Cubit<UsersState> {
     emit(const UsersLoading());
     try {
       final token = storage.getItem('token');
+      print(token);
       final role = storage.getItem('role');
       print(role);
       final userResponse = await _serviceClient.getUsers(token);
@@ -68,6 +69,7 @@ class UsersCubit extends Cubit<UsersState> {
                 name: user.name,
                 email: user.email,
                 password: user.password,
+                role: user.role,
               ))
           .toList();
       print(users);
@@ -80,13 +82,14 @@ class UsersCubit extends Cubit<UsersState> {
   }
 
   Future<void> updateUser(
-      String? id, String name, String email, String password) async {
+      String? id, String name, String email, String role) async {
     UserResponse editUser =
-        UserResponse(id: id, name: name, email: email, password: password);
+        UserResponse(id: id, name: name, email: email, role: role);
     emit(const UsersLoading());
     await Future.delayed(const Duration(seconds: 1));
     try {
       final token = storage.getItem('token');
+      storage.setItem('role', role);
       editUser = await _serviceClient.updateUser(editUser, token);
       emit(const UsersSuccess());
     } on Exception {

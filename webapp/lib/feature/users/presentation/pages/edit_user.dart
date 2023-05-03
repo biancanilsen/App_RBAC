@@ -47,7 +47,6 @@ class _UsersEditViewState extends State<UsersEditView> {
   final TextEditingController _passwordController = TextEditingController();
   final FocusNode _nameFocusNode = FocusNode();
   final FocusNode _emailFocusNode = FocusNode();
-  final FocusNode _passwordFocusNode = FocusNode();
   final textFieldFocusNode = FocusNode();
   bool _obscured = true;
   late final User? user;
@@ -58,19 +57,10 @@ class _UsersEditViewState extends State<UsersEditView> {
     user = widget.user;
   }
 
-  void _toggleObscured() {
-    setState(() {
-      _obscured = !_obscured;
-      if (textFieldFocusNode.hasPrimaryFocus) return;
-      textFieldFocusNode.canRequestFocus = false;
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
-    _nameController.text = widget.user!.name;
-    _emailController.text = widget.user!.email;
-    _passwordController.text = widget.user!.password;
+    _nameController.text = widget.user!.name!;
+    _emailController.text = widget.user!.email!;
 
     return Scaffold(
       resizeToAvoidBottomInset: false,
@@ -111,7 +101,7 @@ class _UsersEditViewState extends State<UsersEditView> {
             ScaffoldMessenger.of(context)
               ..hideCurrentSnackBar()
               ..showSnackBar(const SnackBar(
-                content: Text('Erro'),
+                content: Text('Você não tem permissão para essa operação'),
               ));
           }
         },
@@ -122,7 +112,7 @@ class _UsersEditViewState extends State<UsersEditView> {
             child: Column(
               children: [
                 Padding(
-                  padding: const EdgeInsets.only(top: 200.0, left: 28),
+                  padding: const EdgeInsets.only(top: 150.0, left: 28),
                   child: Form(
                     key: _formKey,
                     child: Column(
@@ -216,6 +206,59 @@ class _UsersEditViewState extends State<UsersEditView> {
                             );
                           },
                         ),
+                        BlocBuilder<UserValidationCubit, UserValidationState>(
+                          builder: (context, state) {
+                            return Padding(
+                              padding:
+                                  const EdgeInsets.only(top: 10, bottom: 10.0),
+                              child: SizedBox(
+                                width: 340,
+                                child: DropdownButtonFormField(
+                                  value: widget.user!.role ?? user?.role,
+                                  hint: const Text('Perfil'),
+                                  style: TextStyle(
+                                    color: Colors.grey[900],
+                                    fontSize: 16.0,
+                                  ),
+                                  decoration: InputDecoration(
+                                    labelText: 'Selecione o perfil',
+                                    filled: true,
+                                    fillColor: Colors.grey[300],
+                                    isDense: true,
+                                    border: OutlineInputBorder(
+                                      borderSide: BorderSide.none,
+                                      borderRadius: BorderRadius.circular(25),
+                                    ),
+                                  ),
+                                  onChanged: (newValue) {
+                                    setState(() {
+                                      user?.role = newValue as String;
+                                    });
+                                  },
+                                  dropdownColor: Colors.white,
+                                  items: const [
+                                    DropdownMenuItem(
+                                      child: Text("Admin"),
+                                      value: "admin",
+                                    ),
+                                    DropdownMenuItem(
+                                      child: Text("Editor"),
+                                      value: "editor",
+                                    ),
+                                    DropdownMenuItem(
+                                      child: Text("User"),
+                                      value: "user",
+                                    ),
+                                    DropdownMenuItem(
+                                      child: Text("Creator"),
+                                      value: "creator",
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            );
+                          },
+                        ),
                         Padding(
                           padding: const EdgeInsets.only(top: 10.0),
                           child: SizedBox(
@@ -233,7 +276,7 @@ class _UsersEditViewState extends State<UsersEditView> {
                                           user?.id,
                                           _nameController.text,
                                           _emailController.text,
-                                          _passwordController.text);
+                                          user!.role!);
                                     },
                                     style: ElevatedButton.styleFrom(
                                       shape: RoundedRectangleBorder(
