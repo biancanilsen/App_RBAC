@@ -1,6 +1,6 @@
 # App_RBAC🚹
 ## Description
-The project consists of a microservice using NestJs with gRPC, access control and Postgres as db, the View was developed in Flutter, using Material, Bloc, hhtp2 requests and user access permissions applying the RBAC content. The purpose of the app is to manage the permissions of registered users
+The project consists of a microservice using NestJs with gRPC, CASL and Postgres as db, the View was developed in Flutter, using Material, Bloc, hhtp2 requests and user access permissions applying the RBAC content. The purpose of the app is to manage the permissions of registered users
 
 ## Technologies used
   
