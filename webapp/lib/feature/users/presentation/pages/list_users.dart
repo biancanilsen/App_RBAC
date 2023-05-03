@@ -36,6 +36,16 @@ class UsersView extends StatelessWidget {
       backgroundColor: Colors.white,
       appBar: AppBar(
         title: const Text('Users'),
+        actions: [
+          IconButton(
+              onPressed: () {
+                storage.clear();
+                Navigator.of(context).pushNamed(
+                  '/portal',
+                );
+              },
+              icon: Icon(Icons.logout))
+        ],
         backgroundColor: const Color(0xFF5367EC),
         foregroundColor: Colors.white,
         centerTitle: true,
