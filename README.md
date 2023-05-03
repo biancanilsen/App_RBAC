@@ -1,12 +1,12 @@
 # App_RBAC
 ## Description
-The project consists of a Microservice using NestJs with gRPC and Postgres as db, the View was developed in Flutter, using Material, Bloc and hhtp2 requests.The purpose of the app is to be a party guest list.
+The project consists of a microservice using NestJs with gRPC, access control and Postgres as db, the View was developed in Flutter, using Material, Bloc, hhtp2 requests and user access permissions applying the RBAC content. The purpose of the app is to manage the permissions of registered users
 
 ## Technologies used
   
 Backend:
 
-> Developed using: Node.js, Sequelize, Express, MySQL, JWT, Jest
+> Developed using: Node.js, Sequelize, Express, Postgres
 
 ##  Installing Dependencies of the back-end:
 
