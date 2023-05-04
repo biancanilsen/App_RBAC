@@ -36,6 +36,16 @@ class UsersView extends StatelessWidget {
       backgroundColor: Colors.white,
       appBar: AppBar(
         title: const Text('Users'),
+        actions: [
+          IconButton(
+              onPressed: () {
+                storage.clear();
+                Navigator.of(context).pushNamed(
+                  '/portal',
+                );
+              },
+              icon: Icon(Icons.logout))
+        ],
         backgroundColor: const Color(0xFF5367EC),
         foregroundColor: Colors.white,
         centerTitle: true,
@@ -155,9 +165,9 @@ class _UsersListState extends State<_UsersList> {
                     borderRadius: BorderRadius.circular(10.0),
                     side: const BorderSide(color: Colors.grey, width: 1),
                   ),
-                  title: Text(user.name),
+                  title: Text(user.name!),
                   subtitle: Text(
-                    user.email,
+                    user.email!,
                   ),
                   trailing: Wrap(
                     children: <Widget>[
