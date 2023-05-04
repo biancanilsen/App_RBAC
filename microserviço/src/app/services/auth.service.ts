@@ -39,6 +39,7 @@ export class AuthService {
         let data = {
             token: token,
             role: user.role,
+            id: user.id
         }
         return data
     }
