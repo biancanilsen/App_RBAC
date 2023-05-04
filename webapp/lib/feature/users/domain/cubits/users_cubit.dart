@@ -46,7 +46,7 @@ class UsersCubit extends Cubit<UsersState> {
       hasToken = await _serviceClient.postLogin(loginUser);
       storage.setItem('token', hasToken.token);
       storage.setItem('role', hasToken.role);
-
+      storage.setItem('id', hasToken.id);
       print(hasToken);
       print(hasToken.role);
       emit(const UsersSuccess());
@@ -89,7 +89,9 @@ class UsersCubit extends Cubit<UsersState> {
     await Future.delayed(const Duration(seconds: 1));
     try {
       final token = storage.getItem('token');
-      storage.setItem('role', role);
+      if (storage.getItem("id") == id) {
+        storage.setItem('role', role);
+      }
       editUser = await _serviceClient.updateUser(editUser, token);
       emit(const UsersSuccess());
     } on Exception {

@@ -15,6 +15,7 @@ message AuthRequest{
 message AuthResponse{
     string token = 1;
     string role = 2;
+    string id = 3;
 }
 
 message TokenRequest{

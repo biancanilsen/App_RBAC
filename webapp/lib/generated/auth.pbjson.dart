@@ -25,11 +25,12 @@ const AuthResponse$json = const {
   '2': const [
     const {'1': 'token', '3': 1, '4': 1, '5': 9, '10': 'token'},
     const {'1': 'role', '3': 2, '4': 1, '5': 9, '10': 'role'},
+    const {'1': 'id', '3': 3, '4': 1, '5': 9, '10': 'id'},
   ],
 };
 
 /// Descriptor for `AuthResponse`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List authResponseDescriptor = $convert.base64Decode('CgxBdXRoUmVzcG9uc2USFAoFdG9rZW4YASABKAlSBXRva2VuEhIKBHJvbGUYAiABKAlSBHJvbGU=');
+final $typed_data.Uint8List authResponseDescriptor = $convert.base64Decode('CgxBdXRoUmVzcG9uc2USFAoFdG9rZW4YASABKAlSBXRva2VuEhIKBHJvbGUYAiABKAlSBHJvbGUSDgoCaWQYAyABKAlSAmlk');
 @$core.Deprecated('Use tokenRequestDescriptor instead')
 const TokenRequest$json = const {
   '1': 'TokenRequest',
