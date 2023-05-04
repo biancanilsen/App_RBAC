@@ -41,7 +41,7 @@ class UsersView extends StatelessWidget {
               onPressed: () {
                 storage.clear();
                 Navigator.of(context).pushNamed(
-                  '/portal',
+                  '/',
                 );
               },
               icon: Icon(Icons.logout))

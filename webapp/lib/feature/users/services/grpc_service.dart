@@ -154,7 +154,3 @@ class ServiceClient {
     }
   }
 }
-
-class MyRequest {}
-
-class MyResponse {}

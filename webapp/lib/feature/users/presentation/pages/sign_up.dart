@@ -68,6 +68,10 @@ class _RegisterPageState extends State<RegisterPage> {
               ..showSnackBar(const SnackBar(
                 content: Text('Operação realizada com sucesso'),
               ));
+            context.read<UsersCubit>().getUsers();
+            Navigator.of(context).pushNamed(
+              '/list',
+            );
           } else if (state is UsersFailure) {
             Navigator.pop(context);
             ScaffoldMessenger.of(context)
