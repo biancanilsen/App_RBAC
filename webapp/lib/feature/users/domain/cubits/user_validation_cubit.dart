@@ -1,6 +1,5 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
-
 part 'user_validation_state.dart';
 
 class UserValidationCubit extends Cubit<UserValidationState> {

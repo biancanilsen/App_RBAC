@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
 import '../../data/models/user_model.dart';
 import '../../domain/cubits/user_validation_cubit.dart';
 import '../../domain/cubits/users_cubit.dart';

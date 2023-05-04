@@ -1,12 +1,10 @@
 import 'package:localstorage/localstorage.dart';
 import 'package:webapp/feature/users/presentation/pages/sign_up.dart';
-
 import '../../domain/cubits/users_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:grpc/grpc.dart';
 import 'package:flutter/cupertino.dart';
-
 import '../../data/models/user_model.dart';
 import '../../domain/cubits/users_cubit.dart';
 import '../../services/grpc_service.dart';
