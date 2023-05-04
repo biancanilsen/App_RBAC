@@ -3,6 +3,9 @@ import { ConfigModule } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { UserModule } from './app/module/user.module';
 import { AuthModule } from './app/module/auth.module';
+import { APP_FILTER } from '@nestjs/core';
+import { UploadModule } from './app/module/upload.module';
+
 
 @Module({
   imports: [ConfigModule.forRoot(),
@@ -15,8 +18,10 @@ import { AuthModule } from './app/module/auth.module';
     password: process.env.DB_PASSWORD,
     synchronize: true,
     entities: [__dirname + '/**/*.entity{.js,.ts}']
-  }), UserModule, AuthModule]
+  }), UserModule, AuthModule, UploadModule]
   , controllers: [],
-  providers: [],
+  providers: [
+
+  ],
 })
 export class AppModule { }

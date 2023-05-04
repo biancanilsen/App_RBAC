@@ -20,7 +20,7 @@ export class UserService {
         try {
             // return await this.userRepository.find(options);
             const users = await this.userRepository.find({
-                select: ['id', 'name', 'email']
+                select: ['id', 'name', 'email', 'role']
             })
             let data = {
                 users
@@ -49,7 +49,9 @@ export class UserService {
 
     async findOne(email: string) {
         try {
-            return await this.userRepository.findOneBy({ email });
+            return this.userRepository.findOne({
+                where: { email },
+            });
         } catch (error) {
             throw new NotFoundException(error.message);
         }
